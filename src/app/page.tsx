@@ -20,6 +20,7 @@ import { FarmerStories } from "@/components/landing/FarmerStories";
 import { ContactSection } from "@/components/landing/ContactSection";
 import { FinalCTA } from "@/components/landing/FinalCTA";
 import { Footer } from "@/components/landing/Footer";
+import { MobileBottomNav } from "@/components/landing/MobileBottomNav";
 
 export default function HomePage() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -85,7 +86,12 @@ export default function HomePage() {
       </div>
 
       {/* Multi-column Semantic Footer */}
-      <Footer />
+      <div className="pb-16 lg:pb-0">
+        <Footer />
+      </div>
+
+      {/* 4. Mobile Fixed Bottom Navigation Bar */}
+      <MobileBottomNav />
     </div>
   );
 }

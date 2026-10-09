@@ -1,10 +1,13 @@
 import * as React from "react";
 import { TRUST_STATS } from "@/data/landingData";
-import { Users, Tractor, Award, MapPin } from "lucide-react";
+import { Users, Tractor, Award, MapPin, PackageCheck, Store, Star } from "lucide-react";
 
 export function TrustStats() {
   const iconMap: Record<string, React.ReactNode> = {
     Users: <Users className="w-5 h-5 text-emerald-700" />,
+    PackageCheck: <PackageCheck className="w-5 h-5 text-emerald-700" />,
+    Store: <Store className="w-5 h-5 text-emerald-700" />,
+    Star: <Star className="w-5 h-5 text-emerald-700" />,
     Tractor: <Tractor className="w-5 h-5 text-emerald-700" />,
     Award: <Award className="w-5 h-5 text-emerald-700" />,
     MapPin: <MapPin className="w-5 h-5 text-emerald-700" />,

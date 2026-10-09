@@ -51,8 +51,8 @@ export function HighestSellers() {
           </div>
         </div>
 
-        {/* 4 Highest Seller Cards Grid (NO Add to Cart buttons) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        {/* 5 Highest Seller Cards Grid (NO Add to Cart buttons per design contract) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
           {HIGHEST_SELLERS_PRODUCTS.map((item, idx) => (
             <a
               key={item.id}

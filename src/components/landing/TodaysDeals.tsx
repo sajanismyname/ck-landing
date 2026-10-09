@@ -53,8 +53,8 @@ export function TodaysDeals() {
           </div>
         </div>
 
-        {/* Product Cards Grid: 6 curated deal items (NO Add to Cart button per design contract) */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-5">
+        {/* Product Cards Grid: 5 curated deal items matching wireframe (NO Add to Cart button per design contract) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
           {TODAYS_DEALS_PRODUCTS.map((deal) => (
             <a
               key={deal.id}

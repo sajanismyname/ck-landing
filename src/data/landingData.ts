@@ -730,6 +730,68 @@ export const HIGHEST_SELLERS_PRODUCTS: HighestSellerProduct[] = [
 ];
 
 // -------------------------------------------------------------
+// BAZAR CURATED PRODUCTS (COMPATIBILITY FALLBACK)
+// -------------------------------------------------------------
+export const BAZAR_CURATED_PRODUCTS: BazarProduct[] = [
+  {
+    id: "bazar-fertilizer-1",
+    name: "Organic Bio-Fertilizer Vermicompost (50kg)",
+    nepaliName: "प्रांगारिक गड्यौला मल",
+    category: "Fertilizer",
+    seller: "Green Agri Bio-Nutrients",
+    currentPriceNpr: 3851,
+    originalPriceNpr: 4012,
+    discountPercentage: 10,
+    inStock: true,
+    badge: "-10% OFF",
+    imageUrl: "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/bazar",
+  },
+  {
+    id: "bazar-tiller-1",
+    name: "Mini Power Tiller 7HP (Petrol Engine)",
+    nepaliName: "मिनी पावर टिलर ७ एचपी",
+    category: "Equipment",
+    seller: "Chitwan Agri-Machinery Hub",
+    currentPriceNpr: 25000,
+    originalPriceNpr: 28500,
+    discountPercentage: 12,
+    inStock: true,
+    badge: "Equipment",
+    imageUrl: "https://images.unsplash.com/photo-1592417817098-8f3d6eb22521?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/bazar",
+  },
+  {
+    id: "bazar-coffee-1",
+    name: "Arabica High-Altitude Roasted Coffee Beans",
+    nepaliName: "अरेबिका कफी गेडा",
+    category: "Tea & Coffee",
+    seller: "Helambu Organic Coffee",
+    currentPriceNpr: 1250,
+    originalPriceNpr: 1400,
+    discountPercentage: 11,
+    inStock: true,
+    badge: "Single Origin",
+    imageUrl: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/bazar",
+  },
+  {
+    id: "bazar-tea-1",
+    name: "Orthodox First Flush Hand-Rolled Green Tea",
+    nepaliName: "इलाम अर्थोडक्स ग्रीन टी",
+    category: "Tea & Coffee",
+    seller: "Ilam Organic Tea Cooperative",
+    currentPriceNpr: 900,
+    originalPriceNpr: 1050,
+    discountPercentage: 14,
+    inStock: true,
+    badge: "Specialty Tea",
+    imageUrl: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/bazar",
+  },
+];
+
+// -------------------------------------------------------------
 // APP SCREENSHOT SLIDES FOR ABOUT SECTION
 // -------------------------------------------------------------
 export const APP_SCREENSHOT_SLIDES: AppScreenshotSlide[] = [
