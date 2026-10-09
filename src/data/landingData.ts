@@ -1249,40 +1249,40 @@ export const KNOWLEDGE_ARTICLES: KnowledgeItem[] = [
 ];
 
 // -------------------------------------------------------------
-// FOOTER STRUCTURE (EXACT LABELS FROM SPECIFICATION)
+// FOOTER STRUCTURE (MATCHING IMAGE 2 EXACT COLUMNS)
 // -------------------------------------------------------------
 export const FOOTER_SECTIONS: FooterSection[] = [
   {
-    title: "Farming & Services",
+    title: "Company",
     links: [
-      { label: "Soil Test / माटो परिक्षण", href: "https://connectkisan.com/soil-test", isExternal: true },
-      { label: "New Farming Technologies / नवीनतम कृषि प्रविधि", href: "https://connectkisan.com/new-farming-technologies", isExternal: true },
-      { label: "Training / तालिम", href: "https://connectkisan.com/training", isExternal: true },
-      { label: "Finance / फाइनान्स", href: "https://connectkisan.com/finance", isExternal: true },
-      { label: "Insurance / बिमा", href: "https://connectkisan.com/insurance", isExternal: true },
-      { label: "Cold Center / कोल्ड सेन्टर", href: "https://connectkisan.com/cold-center", isExternal: true },
+      { label: "About Us", href: "#about" },
+      { label: "FAQ", href: "https://connectkisan.com/faq", isExternal: true },
+      { label: "Feedback", href: "#contact" },
+      { label: "Contact Us", href: "#contact" },
+      { label: "Contribution", href: "https://connectkisan.com/en/contribution", isExternal: true },
     ],
   },
   {
-    title: "Knowledge Bank",
+    title: "Resources",
     links: [
-      { label: "Livestock Knowledge / पशुपालन ज्ञान", href: "https://connectkisan.com/knowledge-bank/livestock-knowledge", isExternal: true },
-      { label: "Crops Knowledge / बाली ज्ञान", href: "https://connectkisan.com/knowledge-bank/crops-knowledge", isExternal: true },
-      { label: "Rooftop/Gardening Farming / कौसी/बगैंचा", href: "https://connectkisan.com/knowledge-bank/rooftop-gardening-farming", isExternal: true },
-      { label: "Insects Pest Management / रोग तथा किरा व्यवस्थापन", href: "https://connectkisan.com/knowledge-bank/insects-pest-management", isExternal: true },
-      { label: "Soil Information / माटो सम्बन्धि ज्ञान", href: "https://connectkisan.com/knowledge-bank/soil-information", isExternal: true },
-      { label: "Video Knowledge / भिडियो बाट ज्ञान", href: "https://connectkisan.com/knowledge-bank/video-knowledge", isExternal: true },
+      { label: "Media Coverage", href: "https://connectkisan.com/media", isExternal: true },
+      { label: "News & Blogs", href: "https://connectkisan.com/news-blogs", isExternal: true },
+      { label: "Success Stories", href: "#stories" },
+      { label: "Reference Content", href: "https://connectkisan.com/knowledge-bank", isExternal: true },
     ],
   },
   {
-    title: "Information & Market",
+    title: "Important Links",
     links: [
-      { label: "Directory / डाइरेक्टरी", href: "https://connectkisan.com/directory", isExternal: true },
-      { label: "Kalimati Market Price / कालिमाटी बजार", href: "https://connectkisan.com/kalimati-market-price", isExternal: true },
-      { label: "Agricultural Markets Price / अन्य बजार", href: "https://connectkisan.com/agricultural-markets-price", isExternal: true },
-      { label: "Kheti Calendar / खेती क्यालेन्डर", href: "https://connectkisan.com/kheti-calendar", isExternal: true },
-      { label: "Weather / मौसम", href: "https://connectkisan.com/weather", isExternal: true },
-      { label: "News & Blogs / समाचार र ब्लगहरू", href: "https://connectkisan.com/news-blogs", isExternal: true },
+      { label: "Associate Partners", href: "https://connectkisan.com/partners", isExternal: true },
+      { label: "Careers", href: "https://connectkisan.com/careers", isExternal: true },
+    ],
+  },
+  {
+    title: "Digital Tools",
+    links: [
+      { label: "Krishi Bot Link", href: "https://connectkisan.com/bot", isExternal: true },
+      { label: "App Download Link", href: "#download" },
     ],
   },
 ];

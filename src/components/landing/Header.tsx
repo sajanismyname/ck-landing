@@ -34,11 +34,11 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-[#FAF9F5] border-b border-stone-200/80 transition-all">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 bg-[#FAF9F5]/95 backdrop-blur-md border-b border-stone-200/80 transition-all w-full max-w-full overflow-hidden">
+      <div className="w-full max-w-full px-3.5 sm:px-6 lg:px-8">
         
         {/* Main Desktop & Mobile Header Row */}
-        <div className="flex items-center justify-between h-16 sm:h-18 gap-3 sm:gap-6">
+        <div className="flex items-center justify-between h-14 sm:h-18 gap-2 sm:gap-6">
           
           {/* Left: Brand Logo */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -47,7 +47,7 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
               className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded-lg p-0.5"
               aria-label="Connect Kisan Home"
             >
-              <Logo variant="default" width={145} height={32} />
+              <Logo variant="default" width={135} height={30} />
             </Link>
           </div>
 
@@ -86,7 +86,7 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
           </div>
 
           {/* Right: Actions */}
-          <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-3.5 shrink-0">
             
             {/* Bazar Green Pill Button (Desktop - on mobile it drops below logo next to sidebar) */}
             <a
@@ -101,16 +101,16 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
             {/* Notification Bell with Red Badge */}
             <button
               type="button"
-              className="relative p-2 rounded-full text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors"
+              className="relative p-1.5 sm:p-2 rounded-full text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors"
               aria-label="Notifications"
             >
               <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white" />
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white" />
             </button>
 
             {/* User Icon Circle */}
-            <div className="w-8 h-8 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center text-stone-600">
-              <User className="w-4 h-4" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center text-stone-600">
+              <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
 
             {/* Login Link */}
@@ -128,14 +128,14 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
         </div>
 
         {/* Mobile Sub-Header Row: Sidebar Toggle (below logo) + Bazar (next to sidebar) + Search Bar */}
-        <div className="pb-3 pt-0.5 md:hidden">
-          <div className="flex items-center gap-2">
+        <div className="pb-2.5 pt-0.5 md:hidden w-full max-w-full">
+          <div className="flex items-center gap-2 w-full max-w-full">
             
             {/* 1. Sidebar Toggle Button (Dropped below the logo on mobile view) */}
             <button
               type="button"
               onClick={onToggleSidebar}
-              className="inline-flex items-center justify-center h-9 w-9 rounded-xl bg-white border border-stone-300 hover:border-emerald-600 text-stone-700 hover:text-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 shadow-2xs transition-colors shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center h-8.5 w-8.5 rounded-xl bg-white border border-stone-300 hover:border-emerald-600 text-stone-700 hover:text-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 shadow-2xs transition-colors shrink-0 cursor-pointer"
               aria-label={isSidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
               title="Toggle sidebar navigation"
             >
@@ -147,7 +147,7 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
               href="https://connectkisan.com/bazar"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-9 px-3.5 bg-[#047857] hover:bg-[#064E3B] text-white text-xs font-bold rounded-full shadow-2xs transition-all shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center h-8.5 px-3 bg-[#047857] hover:bg-[#064E3B] text-white text-xs font-bold rounded-full shadow-2xs transition-all shrink-0 cursor-pointer"
               title="Explore Bazar"
             >
               <span>Bazar</span>
@@ -155,20 +155,20 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
 
             {/* 3. Search Bar Input (Filling remaining width) */}
             <form onSubmit={handleSearchSubmit} className="flex-1 min-w-0">
-              <div className="flex items-center h-9 w-full bg-white rounded-full border border-stone-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/20 px-3 shadow-2xs">
+              <div className="flex items-center h-8.5 w-full bg-white rounded-full border border-stone-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/20 px-2.5 shadow-2xs">
                 <Search className="w-3.5 h-3.5 text-stone-400 mr-1.5 shrink-0" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search crops, prices..."
-                  className="w-full py-0.5 text-xs bg-transparent text-stone-900 placeholder:text-stone-400 outline-none"
+                  className="w-full py-0.5 text-xs bg-transparent text-stone-900 placeholder:text-stone-400 outline-none min-w-0"
                 />
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={() => setSearchQuery("")}
-                    className="p-0.5 text-stone-400 hover:text-stone-600"
+                    className="p-0.5 text-stone-400 hover:text-stone-600 shrink-0"
                     aria-label="Clear search"
                   >
                     <X className="w-3.5 h-3.5" />

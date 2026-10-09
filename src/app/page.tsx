@@ -66,7 +66,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-stone-900 selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-stone-900 selection:bg-emerald-100 selection:text-emerald-900 w-full max-w-[100vw]">
       {/* 1. Header with Search, Bazar, Login, Language, and Sidebar Toggle */}
       <Header
         onToggleSidebar={handleToggleSidebar}
@@ -74,7 +74,7 @@ export default function HomePage() {
       />
 
       {/* Main Layout Container with Persistent Sticky Sidebar and Content Stream */}
-      <div className="flex-1 flex w-full max-w-[1600px] mx-auto items-start relative">
+      <div className="flex-1 flex w-full max-w-[1600px] mx-auto items-start relative min-w-0">
         {/* 2. Integrated Sidebar: Sticky & Persistent throughout Every Scroll */}
         <Sidebar
           isMobileOpen={isMobileSidebarOpen}
@@ -84,7 +84,7 @@ export default function HomePage() {
         />
 
         {/* 3. Main Content Area */}
-        <main className="flex-1 min-w-0 w-full">
+        <main className="flex-1 min-w-0 w-full overflow-x-clip">
           {/* Section 1: Hero / CTA */}
           <Hero />
 

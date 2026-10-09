@@ -99,7 +99,7 @@ export function Sidebar({
           1. DESKTOP INTEGRATED LEFT SIDEBAR (STICKY / PERSISTENT COLUMN ON LEFT)
       ========================================================================= */}
       <aside
-        className={`hidden lg:flex flex-col shrink-0 border-r border-stone-200/80 bg-[#FAF9F5] transition-all duration-300 sticky top-16 sm:top-18 self-start h-[calc(100vh-4rem)] sm:h-[calc(100vh-4.5rem)] z-30 select-none justify-between overflow-y-auto overflow-x-hidden ${
+        className={`hidden lg:flex flex-col shrink-0 border-r border-stone-200/80 bg-[#FAF9F5] transition-all duration-300 sticky top-14 sm:top-18 self-start h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4.5rem)] z-30 select-none justify-between overflow-y-auto overflow-x-hidden ${
           isDesktopExpanded ? "w-60 xl:w-64" : "w-16"
         }`}
         aria-label="Sidebar Navigation"

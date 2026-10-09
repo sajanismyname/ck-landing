@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { HIGHEST_SELLERS_PRODUCTS } from "@/data/landingData";
 import {
@@ -9,16 +10,27 @@ import {
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 export function HighestSellers() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === "left" ? -280 : 280;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="highest-sellers"
       className="py-12 sm:py-16 lg:py-20 bg-[#FAF9F5] border-b border-stone-200/80"
       aria-label="Highest Selling Agricultural Products"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-stone-200/80">
@@ -37,8 +49,8 @@ export function HighestSellers() {
             </p>
           </div>
 
-          {/* View Best Sellers CTA */}
-          <div className="shrink-0">
+          {/* View Best Sellers CTA + Slider Controls */}
+          <div className="flex items-center gap-3 shrink-0">
             <a
               href="https://connectkisan.com/bazar"
               target="_blank"
@@ -48,18 +60,43 @@ export function HighestSellers() {
               <span>Explore All Best Sellers</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </a>
+
+            {/* Slider Navigation Buttons */}
+            <div className="flex items-center gap-1.5 pl-2 border-l border-stone-300">
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                className="w-8 h-8 rounded-full border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 flex items-center justify-center transition-colors cursor-pointer shadow-2xs hover:border-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-600"
+                aria-label="Previous best seller"
+                title="Slide left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                className="w-8 h-8 rounded-full border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 flex items-center justify-center transition-colors cursor-pointer shadow-2xs hover:border-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-600"
+                aria-label="Next best seller"
+                title="Slide right"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* 5 Highest Seller Cards Grid (NO Add to Cart buttons per design contract) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-3.5 lg:gap-4">
+        {/* 5 Highest Seller Cards Slider / Grid */}
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-3.5 lg:gap-4 pb-2 no-scrollbar lg:grid lg:grid-cols-5"
+        >
           {HIGHEST_SELLERS_PRODUCTS.map((item, idx) => (
             <a
               key={item.id}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+              className="shrink-0 w-[155px] sm:w-[195px] lg:w-auto bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 {/* Product Image Container (aspect-[4/3] for sleek proportion) */}

@@ -9,10 +9,10 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-emerald-900/70">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6 pb-12 border-b border-emerald-900/70">
           
           {/* Brand & Bio (2 cols on lg) */}
-          <div className="lg:col-span-2 space-y-5">
+          <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-2 space-y-5 pr-0 lg:pr-4">
             <a href="#" className="inline-block group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 rounded-lg" aria-label="Connect Kisan Home">
               <Logo variant="white" width={180} height={40} />
             </a>
@@ -37,18 +37,23 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Dynamic Link Columns (3 cols on lg) */}
+          {/* Dynamic Link Columns (4 cols on lg: Company, Resources, Important Links, Digital Tools) */}
           {FOOTER_SECTIONS.map((section) => (
-            <div key={section.title} className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-                {section.title}
-              </h4>
+            <div key={section.title} className="col-span-1 space-y-3">
+              <div>
+                <h4 className="text-sm font-bold text-white tracking-tight">
+                  {section.title}
+                </h4>
+                <div className="w-7 h-[2.5px] bg-white/80 rounded-full mt-1.5 mb-3" />
+              </div>
               <ul className="space-y-2.5 text-xs sm:text-sm">
                 {section.links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-stone-300 hover:text-emerald-300 transition-colors inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
+                      target={link.isExternal ? "_blank" : undefined}
+                      rel={link.isExternal ? "noopener noreferrer" : undefined}
+                      className="text-stone-300 hover:text-white hover:underline transition-colors inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400 rounded"
                     >
                       {link.label}
                     </a>

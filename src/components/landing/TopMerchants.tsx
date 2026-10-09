@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { TOP_MERCHANTS } from "@/data/landingData";
 import {
@@ -10,16 +11,27 @@ import {
   ShieldCheck,
   ArrowRight,
   Sparkles,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 export function TopMerchants() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === "left" ? -280 : 280;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="top-merchants"
       className="py-12 sm:py-16 lg:py-20 bg-[#F4F2EB] border-b border-stone-200/80"
       aria-label="Top Agricultural Merchants"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-stone-200/80">
@@ -38,8 +50,8 @@ export function TopMerchants() {
             </p>
           </div>
 
-          {/* View All Merchants CTA */}
-          <div className="shrink-0">
+          {/* View All Merchants CTA + Slider Navigation */}
+          <div className="flex items-center gap-3 shrink-0">
             <a
               href="https://connectkisan.com/bazar"
               target="_blank"
@@ -49,18 +61,43 @@ export function TopMerchants() {
               <span>View All Merchants in Bazar</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </a>
+
+            {/* Slider Navigation Buttons */}
+            <div className="flex items-center gap-1.5 pl-2 border-l border-stone-300">
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                className="w-8 h-8 rounded-full border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 flex items-center justify-center transition-colors cursor-pointer shadow-2xs hover:border-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-600"
+                aria-label="Previous merchant"
+                title="Slide left"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                className="w-8 h-8 rounded-full border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 flex items-center justify-center transition-colors cursor-pointer shadow-2xs hover:border-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-600"
+                aria-label="Next merchant"
+                title="Slide right"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* 4 Merchant Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {/* 4 Merchant Cards Slider / Grid */}
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto scroll-smooth gap-3.5 sm:gap-4 lg:gap-5 pb-2 no-scrollbar lg:grid lg:grid-cols-4"
+        >
           {TOP_MERCHANTS.map((merchant) => (
             <a
               key={merchant.id}
               href={merchant.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-4.5 border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+              className="shrink-0 w-[240px] sm:w-[260px] lg:w-auto bg-white rounded-xl sm:rounded-2xl p-4 sm:p-4.5 border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
             >
               <div className="space-y-3">
                 
