@@ -26,12 +26,43 @@ export default function HomePage() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isDesktopSidebarExpanded, setIsDesktopSidebarExpanded] = useState(true);
 
+  // Retain sidebar state across monitor, laptop, and mobile devices
+  React.useEffect(() => {
+    try {
+      const savedState = localStorage.getItem("ck_sidebar_expanded");
+      if (savedState !== null) {
+        setIsDesktopSidebarExpanded(JSON.parse(savedState));
+      } else if (typeof window !== "undefined" && window.innerWidth < 1280 && window.innerWidth >= 1024) {
+        // On laptop viewports, default to icon strip mode to maximize content width
+        setIsDesktopSidebarExpanded(false);
+      }
+    } catch {
+      // ignore localStorage exceptions
+    }
+  }, []);
+
   const handleToggleSidebar = () => {
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setIsMobileSidebarOpen((prev) => !prev);
     } else {
-      setIsDesktopSidebarExpanded((prev) => !prev);
+      setIsDesktopSidebarExpanded((prev) => {
+        const next = !prev;
+        try {
+          localStorage.setItem("ck_sidebar_expanded", JSON.stringify(next));
+        } catch {}
+        return next;
+      });
     }
+  };
+
+  const handleToggleDesktop = () => {
+    setIsDesktopSidebarExpanded((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem("ck_sidebar_expanded", JSON.stringify(next));
+      } catch {}
+      return next;
+    });
   };
 
   return (
@@ -42,18 +73,18 @@ export default function HomePage() {
         isSidebarOpen={isDesktopSidebarExpanded}
       />
 
-      {/* Main Layout Container with Integrated Sidebar and Content Stream */}
-      <div className="flex-1 flex w-full max-w-[1600px] mx-auto">
-        {/* 2. Integrated Sidebar: Persistent on Desktop, Slide-over Drawer on Mobile */}
+      {/* Main Layout Container with Persistent Sticky Sidebar and Content Stream */}
+      <div className="flex-1 flex w-full max-w-[1600px] mx-auto items-start relative">
+        {/* 2. Integrated Sidebar: Sticky & Persistent throughout Every Scroll */}
         <Sidebar
           isMobileOpen={isMobileSidebarOpen}
           onCloseMobile={() => setIsMobileSidebarOpen(false)}
           isDesktopExpanded={isDesktopSidebarExpanded}
-          onToggleDesktop={() => setIsDesktopSidebarExpanded((prev) => !prev)}
+          onToggleDesktop={handleToggleDesktop}
         />
 
         {/* 3. Main Content Area */}
-        <main className="flex-1 min-w-0 overflow-hidden">
+        <main className="flex-1 min-w-0 w-full">
           {/* Section 1: Hero / CTA */}
           <Hero />
 
