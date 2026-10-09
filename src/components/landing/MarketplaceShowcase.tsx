@@ -89,8 +89,8 @@ export function MarketplaceShowcase() {
               className="bg-white rounded-2xl overflow-hidden border border-stone-200/90 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                {/* Product Image with Badges */}
-                <div className="relative h-52 w-full bg-stone-100 overflow-hidden">
+                {/* Product Image with Badges (aspect-[4/3] for compact proportion) */}
+                <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
                   <Image
                     src={product.imageUrl}
                     alt={`${product.name} sourced from ${product.origin}`}
@@ -101,23 +101,23 @@ export function MarketplaceShowcase() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   
                   {/* Origin tag over image */}
-                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-xs text-white text-xs font-medium">
+                  <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium">
                     <MapPin className="w-3 h-3 text-emerald-400" />
                     <span>{product.origin}</span>
                   </div>
 
                   {/* Highlight tag over image */}
-                  <div className="absolute top-3 right-3">
-                    <Badge variant="amber" className="shadow-xs font-semibold">
+                  <div className="absolute top-2.5 right-2.5">
+                    <Badge variant="amber" className="shadow-xs font-semibold text-[10px]">
                       {product.highlightTag}
                     </Badge>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 sm:p-6">
+                <div className="p-4 sm:p-4.5 space-y-2">
                   {/* Verification badges row */}
-                  <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
                     {product.verified && (
                       <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
                         <ShieldCheck className="w-3 h-3" />

@@ -52,77 +52,76 @@ export function HighestSellers() {
         </div>
 
         {/* 5 Highest Seller Cards Grid (NO Add to Cart buttons per design contract) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-3.5 lg:gap-4">
           {HIGHEST_SELLERS_PRODUCTS.map((item, idx) => (
             <a
               key={item.id}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+              className="bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
             >
               <div>
-                {/* Product Image Container */}
-                <div className="relative h-48 w-full bg-stone-100 overflow-hidden">
+                {/* Product Image Container (aspect-[4/3] for sleek proportion) */}
+                <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
                   <Image
                     src={item.imageUrl}
                     alt={item.name}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
 
                   {/* Rank Badge */}
-                  <div className="absolute top-2.5 left-2.5">
-                    <span className="bg-emerald-900 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-xs flex items-center gap-1">
-                      <Award className="w-3 h-3 text-amber-400" />
-                      #{idx + 1} Best Seller
+                  <div className="absolute top-2 left-2">
+                    <span className="bg-emerald-900 text-white text-[9px] sm:text-[10px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center gap-0.5">
+                      <Award className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-400" />
+                      #{idx + 1}
                     </span>
                   </div>
 
                   {/* Demand Tag */}
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5">
-                    <div className="bg-stone-900/80 backdrop-blur-xs text-white text-[10px] font-semibold px-2 py-1 rounded-md text-center truncate">
+                  <div className="absolute bottom-1.5 left-1.5 right-1.5">
+                    <div className="bg-stone-900/80 backdrop-blur-xs text-white text-[9px] font-semibold px-1.5 py-0.5 rounded text-center truncate">
                       {item.demandIndicator}
                     </div>
                   </div>
                 </div>
 
-                {/* Content Details */}
-                <div className="p-4 sm:p-5 space-y-2">
-                  <div className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">
+                {/* Content Details (compact vertical length) */}
+                <div className="p-2.5 sm:p-3 space-y-1">
+                  <div className="text-[9px] sm:text-[10px] font-bold text-emerald-700 uppercase tracking-wider truncate">
                     {item.category}
                   </div>
 
-                  <h3 className="text-sm sm:text-base font-bold text-stone-900 font-heading leading-snug group-hover:text-emerald-800 transition-colors line-clamp-2">
+                  <h3 className="text-xs sm:text-[13px] font-bold text-stone-900 font-heading leading-tight group-hover:text-emerald-800 transition-colors line-clamp-1">
                     {item.name}
                   </h3>
 
                   {/* Sales Volume Indicator */}
-                  <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 text-[11px] font-bold border border-emerald-200/80">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-900 text-[10px] font-bold border border-emerald-200/80">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                     <span>{item.salesVolume}</span>
                   </div>
 
                   {/* Price */}
-                  <div className="pt-2 flex items-baseline justify-between">
+                  <div className="pt-1 flex items-baseline justify-between">
                     <div>
-                      <span className="text-xs text-stone-400 font-medium block">Wholesale Rate</span>
-                      <span className="text-base sm:text-lg font-extrabold text-stone-900 font-heading">
+                      <span className="text-xs sm:text-sm font-extrabold text-stone-900 font-heading">
                         NPR {item.priceNpr.toLocaleString()}
                       </span>
                     </div>
-                    <span className="text-[11px] text-stone-500 font-medium truncate max-w-[120px]">
-                      By {item.seller}
+                    <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium truncate max-w-[80px]">
+                      {item.seller}
                     </span>
                   </div>
                 </div>
               </div>
 
               {/* View in Bazar Footer Link (No cart button) */}
-              <div className="p-4 sm:p-5 pt-0 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors mt-2">
-                <span>View Product Details</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <div className="px-2.5 sm:px-3 py-1.5 border-t border-stone-100 flex items-center justify-between text-[10px] sm:text-[11px] font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors">
+                <span>View Details</span>
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
               </div>
             </a>
           ))}

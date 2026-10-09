@@ -40,20 +40,8 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
         {/* Main Desktop & Mobile Header Row */}
         <div className="flex items-center justify-between h-16 sm:h-18 gap-3 sm:gap-6">
           
-          {/* Left: Mobile Sidebar Toggle + Brand Logo */}
+          {/* Left: Brand Logo */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Mobile / Collapsed Sidebar Toggle Button */}
-            <button
-              type="button"
-              onClick={onToggleSidebar}
-              className="lg:hidden p-2 -ml-1 rounded-xl text-stone-700 hover:text-emerald-800 hover:bg-stone-200/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 transition-colors cursor-pointer"
-              aria-label={isSidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
-              title={isSidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
-            >
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-stone-800" />
-            </button>
-
-            {/* Logo */}
             <Link
               href="/"
               className="flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded-lg p-0.5"
@@ -63,7 +51,7 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
             </Link>
           </div>
 
-          {/* Center: Search Bar for crops, products, prices, or anything */}
+          {/* Center: Search Bar (Desktop only) */}
           <div className="hidden md:flex flex-1 max-w-xl mx-2">
             <form onSubmit={handleSearchSubmit} className="w-full relative">
               <div
@@ -97,15 +85,15 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
             </form>
           </div>
 
-          {/* Right: Bazar Pill Button + Notification Bell + User Avatar + Login */}
+          {/* Right: Actions */}
           <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
             
-            {/* Bazar Green Pill Button */}
+            {/* Bazar Green Pill Button (Desktop - on mobile it drops below logo next to sidebar) */}
             <a
               href="https://connectkisan.com/bazar"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-[#047857] hover:bg-[#064E3B] text-white text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-2xs transition-all hover:scale-[1.02] cursor-pointer"
+              className="hidden md:inline-flex items-center gap-1.5 bg-[#047857] hover:bg-[#064E3B] text-white text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-2xs transition-all hover:scale-[1.02] cursor-pointer"
             >
               <span>Bazar</span>
             </a>
@@ -139,30 +127,57 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
 
         </div>
 
-        {/* Mobile Search Row (Dedicated Row on Viewports < 768px) */}
-        <div className="pb-3 md:hidden">
-          <form onSubmit={handleSearchSubmit} className="w-full">
-            <div className="flex items-center w-full bg-white rounded-full border border-stone-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/20 px-3 py-1.5 shadow-2xs">
-              <Search className="w-4 h-4 text-stone-400 mr-2 shrink-0" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for crops, products, prices..."
-                className="w-full py-1 text-xs bg-transparent text-stone-900 placeholder:text-stone-400 outline-none"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery("")}
-                  className="p-1 text-stone-400 hover:text-stone-600"
-                  aria-label="Clear search"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-          </form>
+        {/* Mobile Sub-Header Row: Sidebar Toggle (below logo) + Bazar (next to sidebar) + Search Bar */}
+        <div className="pb-3 pt-0.5 md:hidden">
+          <div className="flex items-center gap-2">
+            
+            {/* 1. Sidebar Toggle Button (Dropped below the logo on mobile view) */}
+            <button
+              type="button"
+              onClick={onToggleSidebar}
+              className="inline-flex items-center justify-center h-9 w-9 rounded-xl bg-white border border-stone-300 hover:border-emerald-600 text-stone-700 hover:text-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 shadow-2xs transition-colors shrink-0 cursor-pointer"
+              aria-label={isSidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
+              title="Toggle sidebar navigation"
+            >
+              <Menu className="w-4 h-4 text-stone-800" />
+            </button>
+
+            {/* 2. Bazar Button (Dropped next to the sidebar on mobile view) */}
+            <a
+              href="https://connectkisan.com/bazar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-9 px-3.5 bg-[#047857] hover:bg-[#064E3B] text-white text-xs font-bold rounded-full shadow-2xs transition-all shrink-0 cursor-pointer"
+              title="Explore Bazar"
+            >
+              <span>Bazar</span>
+            </a>
+
+            {/* 3. Search Bar Input (Filling remaining width) */}
+            <form onSubmit={handleSearchSubmit} className="flex-1 min-w-0">
+              <div className="flex items-center h-9 w-full bg-white rounded-full border border-stone-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/20 px-3 shadow-2xs">
+                <Search className="w-3.5 h-3.5 text-stone-400 mr-1.5 shrink-0" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search crops, prices..."
+                  className="w-full py-0.5 text-xs bg-transparent text-stone-900 placeholder:text-stone-400 outline-none"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="p-0.5 text-stone-400 hover:text-stone-600"
+                    aria-label="Clear search"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            </form>
+
+          </div>
         </div>
 
       </div>

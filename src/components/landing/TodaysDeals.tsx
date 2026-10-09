@@ -54,59 +54,59 @@ export function TodaysDeals() {
         </div>
 
         {/* Product Cards Grid: 5 curated deal items matching wireframe (NO Add to Cart button per design contract) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-3.5 lg:gap-4">
           {TODAYS_DEALS_PRODUCTS.map((deal) => (
             <a
               key={deal.id}
               href={deal.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+              className="bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
             >
               <div>
-                {/* Product Image Box */}
-                <div className="relative aspect-square w-full bg-stone-100 overflow-hidden">
+                {/* Product Image Box (aspect-[4/3] for balanced proportion) */}
+                <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
                   <Image
                     src={deal.imageUrl}
                     alt={deal.name}
                     fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   
                   {/* Discount Badge */}
                   <div className="absolute top-2 left-2 flex flex-col gap-1">
-                    <span className="bg-red-600 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded shadow-xs">
+                    <span className="bg-red-600 text-white text-[9px] sm:text-[10px] font-extrabold px-1.5 py-0.5 rounded shadow-xs">
                       {deal.badge}
                     </span>
                   </div>
 
                   {/* Stock tag */}
-                  <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-xs px-1.5 py-0.5 rounded text-[9px] font-bold text-emerald-800 border border-emerald-200">
+                  <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-xs px-1.5 py-0.5 rounded text-[8px] sm:text-[9px] font-bold text-emerald-800 border border-emerald-200">
                     In Stock
                   </div>
                 </div>
 
-                {/* Product Content Details */}
-                <div className="p-3 sm:p-4 space-y-1.5">
-                  <div className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider truncate">
+                {/* Product Content Details (compact vertical length) */}
+                <div className="p-2.5 sm:p-3 space-y-1">
+                  <div className="text-[9px] sm:text-[10px] font-semibold text-emerald-700 uppercase tracking-wider truncate">
                     {deal.category}
                   </div>
 
-                  <h3 className="text-xs sm:text-sm font-bold text-stone-900 font-heading leading-snug group-hover:text-emerald-800 transition-colors line-clamp-2">
+                  <h3 className="text-xs sm:text-[13px] font-bold text-stone-900 font-heading leading-tight group-hover:text-emerald-800 transition-colors line-clamp-1">
                     {deal.name}
                   </h3>
 
-                  <div className="text-[10px] text-stone-500 truncate">
+                  <div className="text-[9px] sm:text-[10px] text-stone-500 truncate">
                     {deal.unit} • {deal.seller}
                   </div>
 
                   {/* Price Block */}
-                  <div className="pt-1.5 flex flex-wrap items-baseline gap-1.5">
-                    <span className="text-sm sm:text-base font-extrabold text-stone-900 font-heading">
+                  <div className="pt-1 flex flex-wrap items-baseline gap-1.5">
+                    <span className="text-xs sm:text-sm font-extrabold text-stone-900 font-heading">
                       NPR {deal.currentPriceNpr.toLocaleString()}
                     </span>
-                    <span className="text-[10px] text-stone-400 line-through">
+                    <span className="text-[9px] sm:text-[10px] text-stone-400 line-through">
                       NPR {deal.originalPriceNpr.toLocaleString()}
                     </span>
                   </div>
@@ -114,9 +114,9 @@ export function TodaysDeals() {
               </div>
 
               {/* View in Bazar Footer Link (No cart buttons) */}
-              <div className="p-3 sm:p-4 pt-0 border-t border-stone-100 flex items-center justify-between text-[11px] font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors mt-2">
+              <div className="px-2.5 sm:px-3 py-1.5 border-t border-stone-100 flex items-center justify-between text-[10px] sm:text-[11px] font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors">
                 <span>View in Bazar</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
               </div>
             </a>
           ))}
