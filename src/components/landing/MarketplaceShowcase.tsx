@@ -1,33 +1,29 @@
 "use client";
 
 import * as React from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { MARKETPLACE_PRODUCTS, MarketplaceProduct } from "@/data/landingData";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useCarousel } from "@/hooks/useCarousel";
+import { CarouselOverlayArrows } from "@/components/ui/carousel-controls";
 import {
   ShieldCheck,
-  Sprout,
   MapPin,
   ArrowRight,
-  Filter,
-  CheckCircle2,
   Package,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 
 export function MarketplaceShowcase() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === "left" ? -280 : 280;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
+  const {
+    containerRef,
+    canScrollLeft,
+    canScrollRight,
+    scrollLeft,
+    scrollRight,
+    scrollToStart,
+  } = useCarousel();
 
   const categories = [
     { id: "all", label: "All Harvests / सबै उत्पादन" },
@@ -41,13 +37,19 @@ export function MarketplaceShowcase() {
       ? MARKETPLACE_PRODUCTS
       : MARKETPLACE_PRODUCTS.filter((p) => p.category === activeCategory);
 
+  const handleCategoryChange = (catId: string) => {
+    setActiveCategory(catId);
+    scrollToStart();
+  };
+
   return (
     <section id="marketplace" className="py-12 sm:py-16 lg:py-20 bg-[#FAF9F5]" aria-label="Marketplace Showcase">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-stone-200/80">
-          <div className="max-w-2xl space-y-2">
+        {/* Header (2-Row Responsive Wrapping on Mobile) */}
+        <div className="flex flex-col gap-3.5 pb-4 border-b border-stone-200/80">
+          {/* Row 1: Label, Title & Description */}
+          <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-semibold uppercase tracking-wider">
               <Package className="w-3.5 h-3.5 text-emerald-700" />
               <span>Direct Farm Marketplace</span>
@@ -60,71 +62,68 @@ export function MarketplaceShowcase() {
             </p>
           </div>
 
-          {/* Top CTA Link + Slider Arrows */}
-          <div className="flex items-center gap-3 shrink-0">
-            <a
-              href="https://connectkisan.com/bazar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-800 hover:text-emerald-950 transition-colors group"
-            >
-              <span>Explore Marketplace in Bazar</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
+          {/* Row 2: Category Filter Tabs + Top CTA Link */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+            {/* Category Filter Tabs */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar max-w-full">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => handleCategoryChange(cat.id)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 ${
+                    activeCategory === cat.id
+                      ? "bg-emerald-900 text-white shadow-xs"
+                      : "bg-white text-stone-700 hover:bg-stone-100 border border-stone-200"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
 
-            {/* Slider Navigation Buttons */}
-            <div className="flex items-center gap-1.5 pl-2 border-l border-stone-300">
-              <button
-                type="button"
-                onClick={() => scroll("left")}
-                className="w-8 h-8 rounded-full border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 flex items-center justify-center transition-colors cursor-pointer shadow-2xs hover:border-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-600"
-                aria-label="Previous harvest"
-                title="Slide left"
+            {/* Link to Bazar */}
+            <div className="flex items-center gap-3 shrink-0 ml-auto">
+              <a
+                href="https://connectkisan.com/bazar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-800 hover:text-emerald-950 transition-colors group"
               >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scroll("right")}
-                className="w-8 h-8 rounded-full border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 flex items-center justify-center transition-colors cursor-pointer shadow-2xs hover:border-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-600"
-                aria-label="Next harvest"
-                title="Slide right"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
+                <span>Explore Marketplace in Bazar</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                activeCategory === cat.id
-                  ? "bg-emerald-900 text-white shadow-xs"
-                  : "bg-white text-stone-700 hover:bg-stone-100 border border-stone-200"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+        {/* Products Slider Container with Inset Overlaid Controls */}
+        <div className="relative group">
+          {/* Overlay Arrows centered on product image */}
+          <CarouselOverlayArrows
+            onPrev={scrollLeft}
+            onNext={scrollRight}
+            canPrev={canScrollLeft}
+            canNext={canScrollRight}
+            prevLabel="Previous products"
+            nextLabel="Next products"
+            topOffsetClass="top-[72px] sm:top-[82px]"
+          />
 
-        {/* Compact Products Slider / Grid (Matching TodaysDeals and TopMerchants Card Size) */}
-        <div
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-3.5 lg:gap-4 pb-2 no-scrollbar lg:grid lg:grid-cols-4 xl:grid-cols-6"
-        >
+          {/* Scrolling Track */}
+          <div
+            ref={containerRef}
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Direct Farm Marketplace Carousel"
+            className="flex overflow-x-auto scroll-smooth gap-3.5 sm:gap-4 pb-2 no-scrollbar [scroll-snap-type:x_mandatory]"
+          >
           {filteredProducts.map((product) => (
             <a
               key={product.id}
               href="https://connectkisan.com/bazar"
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 w-[165px] sm:w-[195px] lg:w-auto bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+              className="shrink-0 [scroll-snap-align:start] w-[70vw] max-w-[220px] sm:w-[210px] md:w-[230px] lg:w-[220px] bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 {/* Product Image with Badges (aspect-[4/3] compact proportion) */}
@@ -133,7 +132,7 @@ export function MarketplaceShowcase() {
                     src={product.imageUrl}
                     alt={`${product.name} sourced from ${product.origin}`}
                     fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                    sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 220px"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -182,12 +181,13 @@ export function MarketplaceShowcase() {
               </div>
             </a>
           ))}
+          </div>
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-12 bg-emerald-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
+        <div className="mt-8 sm:mt-12 bg-emerald-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
           <div className="space-y-1 text-center sm:text-left">
-            <h3 className="text-xl font-bold font-heading">
+            <h3 className="text-lg sm:text-xl font-bold font-heading">
               Are you an agricultural producer, cooperative, or bulk buyer?
             </h3>
             <p className="text-xs sm:text-sm text-emerald-100/90">
@@ -196,9 +196,11 @@ export function MarketplaceShowcase() {
           </div>
           <Button
             asChild
-            className="bg-white text-emerald-900 hover:bg-emerald-50 font-bold px-6 py-2.5 rounded-xl shrink-0"
+            className="bg-white text-emerald-900 hover:bg-emerald-50 font-bold px-6 py-2.5 rounded-xl shrink-0 cursor-pointer"
           >
-            <a href="#register-farmer">Join as Seller / Buyer</a>
+            <a href="https://connectkisan.com/bazar" target="_blank" rel="noopener noreferrer">
+              Join as Seller / Buyer
+            </a>
           </Button>
         </div>
 
