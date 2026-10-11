@@ -65,7 +65,7 @@ export function MarketplaceShowcase() {
           {/* Row 2: Category Filter Tabs + Top CTA Link */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
             {/* Category Filter Tabs */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar max-w-full">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden max-w-full">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
@@ -109,13 +109,13 @@ export function MarketplaceShowcase() {
             topOffsetClass="top-1/2"
           />
 
-          {/* Scrolling Track */}
+          {/* Scrolling Track without visible bottom scrollbar */}
           <div
             ref={containerRef}
             role="region"
             aria-roledescription="carousel"
             aria-label="Direct Farm Marketplace Carousel"
-            className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-4 py-1 no-scrollbar [scroll-snap-type:x_mandatory]"
+            className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-4 py-1 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [scroll-snap-type:x_mandatory]"
           >
           {filteredProducts.map((product) => (
             <a
