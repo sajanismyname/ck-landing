@@ -117,31 +117,19 @@ export function Header({
 
             {/* User Login / Profile Toggle Area */}
             {isLoggedIn ? (
-              <div className="flex items-center gap-2 sm:gap-3">
-                {/* User Profile Pill */}
-                <div
-                  className="flex items-center gap-1.5 sm:gap-2 bg-emerald-50 border border-emerald-200/80 rounded-full py-1 px-2 sm:px-2.5 select-none"
-                  title="Logged in as Ram Sharma"
-                >
-                  <div className="relative w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold shadow-xs">
-                    <span>RS</span>
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
-                  </div>
-                  <div className="hidden sm:flex flex-col text-left pr-1">
-                    <span className="text-xs font-bold text-stone-800 leading-tight">Ram Sharma</span>
-                    <span className="text-[10px] text-emerald-700 font-semibold leading-tight">Verified Farmer</span>
-                  </div>
+              /* User Profile Pill in Navbar (Logout is in the Sidebar tail) */
+              <div
+                className="flex items-center gap-1.5 sm:gap-2 bg-emerald-50 border border-emerald-200/80 rounded-full py-1 px-2 sm:px-2.5 select-none"
+                title="Logged in as Ram Sharma"
+              >
+                <div className="relative w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold shadow-xs">
+                  <span>RS</span>
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
                 </div>
-
-                {/* Logout Button */}
-                <button
-                  type="button"
-                  onClick={onToggleLogin}
-                  className="text-xs sm:text-sm font-semibold text-stone-600 hover:text-rose-600 hover:bg-rose-50 border border-stone-200 hover:border-rose-200 rounded-full px-2.5 sm:px-3 py-1.5 transition-all cursor-pointer"
-                  title="Click to Log Out"
-                >
-                  Logout
-                </button>
+                <div className="hidden sm:flex flex-col text-left pr-1">
+                  <span className="text-xs font-bold text-stone-800 leading-tight">Ram Sharma</span>
+                  <span className="text-[10px] text-emerald-700 font-semibold leading-tight">Verified Farmer</span>
+                </div>
               </div>
             ) : (
               <button
