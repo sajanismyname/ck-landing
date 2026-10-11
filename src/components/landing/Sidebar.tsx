@@ -278,33 +278,21 @@ export function Sidebar({
         {isLoggedIn ? (
           <div className="p-3 border-t border-stone-200/80 space-y-2 shrink-0 bg-[#FAF9F5]">
             {isDesktopExpanded ? (
-              <div className="space-y-2">
-                <div className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
-                  <div className="relative w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold shrink-0">
-                    <span>RS</span>
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
-                  </div>
-                  <div className="flex flex-col min-w-0 flex-1">
-                    <span className="text-xs font-bold text-stone-800 truncate leading-tight">Ram Sharma</span>
-                    <span className="text-[10px] text-emerald-700 font-semibold truncate leading-tight">Verified Farmer</span>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={onLogout}
-                  className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/80 transition-all cursor-pointer shadow-2xs hover:shadow-xs"
-                  title="Log Out of Connect Kisan"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                  <span>Log Out</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={onLogout}
+                className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/80 transition-all cursor-pointer shadow-2xs hover:shadow-xs"
+                title="Log Out of Connect Kisan"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Log Out</span>
+              </button>
             ) : (
               <button
                 type="button"
                 onClick={onLogout}
                 className="w-full flex items-center justify-center p-2.5 rounded-xl text-rose-700 hover:bg-rose-100 bg-rose-50 border border-rose-200/80 transition-all cursor-pointer"
-                title="Log Out (Ram Sharma)"
+                title="Log Out"
               >
                 <LogOut className="w-4 h-4" />
               </button>
@@ -469,29 +457,17 @@ export function Sidebar({
             {/* Bottom Tail Region in Drawer */}
             <div className="p-4 border-t border-stone-200/80 bg-white space-y-2 shrink-0">
               {isLoggedIn && (
-                <div className="space-y-2 pb-1">
-                  <div className="flex items-center gap-2.5 p-2 rounded-xl bg-stone-50 border border-stone-200">
-                    <div className="relative w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold shrink-0">
-                      <span>RS</span>
-                      <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
-                    </div>
-                    <div className="flex flex-col min-w-0 flex-1">
-                      <span className="text-xs font-bold text-stone-800 truncate leading-tight">Ram Sharma</span>
-                      <span className="text-[10px] text-emerald-700 font-semibold truncate leading-tight">Verified Farmer</span>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onCloseMobile();
-                      onLogout?.();
-                    }}
-                    className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/80 transition-all cursor-pointer"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>Log Out</span>
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onCloseMobile();
+                    onLogout?.();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/80 transition-all cursor-pointer mb-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Log Out</span>
+                </button>
               )}
 
               <p className="text-[11px] text-center font-bold text-emerald-800 pt-0.5">
