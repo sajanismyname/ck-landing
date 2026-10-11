@@ -17,9 +17,16 @@ import {
 interface HeaderProps {
   onToggleSidebar: () => void;
   isSidebarOpen: boolean;
+  isLoggedIn?: boolean;
+  onToggleLogin?: () => void;
 }
 
-export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
+export function Header({
+  onToggleSidebar,
+  isSidebarOpen,
+  isLoggedIn = false,
+  onToggleLogin,
+}: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -108,20 +115,52 @@ export function Header({ onToggleSidebar, isSidebarOpen }: HeaderProps) {
               <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-red-500 ring-2 ring-white" />
             </button>
 
-            {/* User Icon Circle */}
-            <div className="w-8.5 h-8.5 sm:w-9.5 sm:h-9.5 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center text-stone-600">
-              <User className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-            </div>
+            {/* User Login / Profile Toggle Area */}
+            {isLoggedIn ? (
+              <div className="flex items-center gap-2 sm:gap-3">
+                {/* User Profile Pill */}
+                <div
+                  className="flex items-center gap-1.5 sm:gap-2 bg-emerald-50 border border-emerald-200/80 rounded-full py-1 px-2 sm:px-2.5 select-none"
+                  title="Logged in as Ram Sharma"
+                >
+                  <div className="relative w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold shadow-xs">
+                    <span>RS</span>
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full" />
+                  </div>
+                  <div className="hidden sm:flex flex-col text-left pr-1">
+                    <span className="text-xs font-bold text-stone-800 leading-tight">Ram Sharma</span>
+                    <span className="text-[10px] text-emerald-700 font-semibold leading-tight">Verified Farmer</span>
+                  </div>
+                </div>
 
-            {/* Login Link */}
-            <a
-              href="https://connectkisan.com/login"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm sm:text-base font-bold text-stone-800 hover:text-emerald-800 transition-colors px-1.5 py-1"
-            >
-              Login
-            </a>
+                {/* Logout Button */}
+                <button
+                  type="button"
+                  onClick={onToggleLogin}
+                  className="text-xs sm:text-sm font-semibold text-stone-600 hover:text-rose-600 hover:bg-rose-50 border border-stone-200 hover:border-rose-200 rounded-full px-2.5 sm:px-3 py-1.5 transition-all cursor-pointer"
+                  title="Click to Log Out"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={onToggleLogin}
+                className="flex items-center gap-1.5 sm:gap-2 text-stone-800 hover:text-emerald-800 transition-colors cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded-full p-0.5"
+                title="Click to Log In (Demo)"
+              >
+                {/* User Icon Circle */}
+                <div className="w-8.5 h-8.5 sm:w-9.5 sm:h-9.5 rounded-full bg-stone-100 border border-stone-200 group-hover:border-emerald-500 group-hover:bg-emerald-50 flex items-center justify-center text-stone-600 group-hover:text-emerald-700 transition-colors">
+                  <User className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
+                </div>
+
+                {/* Login Link / Label */}
+                <span className="text-sm sm:text-base font-bold text-stone-800 group-hover:text-emerald-800 transition-colors px-1 py-0.5">
+                  Login
+                </span>
+              </button>
+            )}
 
           </div>
 

@@ -25,8 +25,9 @@ import { MobileBottomNav } from "@/components/landing/MobileBottomNav";
 export default function HomePage() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isDesktopSidebarExpanded, setIsDesktopSidebarExpanded] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Retain sidebar state across monitor, laptop, and mobile devices
+  // Retain sidebar state and login state across sessions and viewports
   React.useEffect(() => {
     try {
       const savedState = localStorage.getItem("ck_sidebar_expanded");
@@ -35,6 +36,11 @@ export default function HomePage() {
       } else if (typeof window !== "undefined" && window.innerWidth < 1280 && window.innerWidth >= 1024) {
         // On laptop viewports, default to icon strip mode to maximize content width
         setIsDesktopSidebarExpanded(false);
+      }
+
+      const savedLogin = localStorage.getItem("ck_logged_in");
+      if (savedLogin !== null) {
+        setIsLoggedIn(JSON.parse(savedLogin));
       }
     } catch {
       // ignore localStorage exceptions
@@ -65,12 +71,24 @@ export default function HomePage() {
     });
   };
 
+  const handleToggleLogin = () => {
+    setIsLoggedIn((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem("ck_logged_in", JSON.stringify(next));
+      } catch {}
+      return next;
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-stone-900 selection:bg-emerald-100 selection:text-emerald-900 w-full max-w-[100vw]">
       {/* 1. Header with Search, Bazar, Login, Language, and Sidebar Toggle */}
       <Header
         onToggleSidebar={handleToggleSidebar}
         isSidebarOpen={isDesktopSidebarExpanded}
+        isLoggedIn={isLoggedIn}
+        onToggleLogin={handleToggleLogin}
       />
 
       {/* Main Layout Container with Persistent Sticky Sidebar and Content Stream */}
@@ -85,8 +103,8 @@ export default function HomePage() {
 
         {/* 3. Main Content Area */}
         <main className="flex-1 min-w-0 w-full overflow-x-clip">
-          {/* Section 1: Hero / CTA */}
-          <Hero />
+          {/* Section 1: Hero / CTA (Smart adaptive CTA for logged-in user) */}
+          <Hero isLoggedIn={isLoggedIn} />
 
           {/* Trust Statistics Bar */}
           <TrustStats />
@@ -100,19 +118,37 @@ export default function HomePage() {
           {/* Section 4: Highest Sellers (Without Add to Cart per design.md) */}
           <HighestSellers />
 
-          {/* Section 5: Community Contribution CTA (Be Part of a Stronger Agricultural Community) */}
-          <ContributeSection />
+          {/* Section 5: Community Contribution CTA (Visitor-only community outreach) */}
+          {!isLoggedIn && <ContributeSection />}
 
-          {/* Section 6: Existing Agriculture Ecosystem & Tools */}
-          <TheChallenge />
-          <FeaturePillars />
-          <HowItWorks />
+          {/* Section 6: Visitor Onboarding & Promotional Storytelling */}
+          {!isLoggedIn && (
+            <>
+              {/* The Agricultural Challenge Narrative */}
+              <TheChallenge />
+              {/* What can you do on Connect Kisan? */}
+              <FeaturePillars />
+              {/* A Clear 4-Step Process: From farm to market, made simpler */}
+              <HowItWorks />
+            </>
+          )}
+
+          {/* Section 7: Core Farmer & Commerce Utilities (Active everyday tools) */}
           <DigitalAgriculture />
           <MarketplaceShowcase />
           <KnowledgeSection />
-          <FarmerStories />
-          <ContactSection />
-          <FinalCTA />
+
+          {/* Section 8: Visitor Social Proof, Lead Generation & Final Onboarding CTA */}
+          {!isLoggedIn && (
+            <>
+              {/* Community Reviews / Farmer Experiences */}
+              <FarmerStories />
+              {/* Connect With Us / Direct Farmer Support Inquiry Form */}
+              <ContactSection />
+              {/* Final Onboarding Registration Banner */}
+              <FinalCTA />
+            </>
+          )}
         </main>
       </div>
 

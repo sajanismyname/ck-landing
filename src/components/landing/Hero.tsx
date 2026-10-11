@@ -22,7 +22,11 @@ import {
   ThermometerSun,
 } from "lucide-react";
 
-export function Hero() {
+interface HeroProps {
+  isLoggedIn?: boolean;
+}
+
+export function Hero({ isLoggedIn = false }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const totalSlides = 3;
@@ -80,10 +84,17 @@ export function Hero() {
                 size="lg"
                 className="bg-stone-800 hover:bg-stone-900 text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all group cursor-pointer"
               >
-                <a href="#get-started" className="flex items-center justify-center gap-2">
-                  <span>Get Started Free</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                {isLoggedIn ? (
+                  <a href="#todays-deals" className="flex items-center justify-center gap-2">
+                    <span>Browse Today&apos;s Deals</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                ) : (
+                  <a href="#get-started" className="flex items-center justify-center gap-2">
+                    <span>Get Started Free</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                )}
               </Button>
 
               <Button
