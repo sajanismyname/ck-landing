@@ -99,6 +99,8 @@ export default function HomePage() {
           onCloseMobile={() => setIsMobileSidebarOpen(false)}
           isDesktopExpanded={isDesktopSidebarExpanded}
           onToggleDesktop={handleToggleDesktop}
+          isLoggedIn={isLoggedIn}
+          onLogout={handleToggleLogin}
         />
 
         {/* 3. Main Content Area */}
@@ -106,8 +108,8 @@ export default function HomePage() {
           {/* Section 1: Hero / CTA (Smart adaptive CTA for logged-in user) */}
           <Hero isLoggedIn={isLoggedIn} />
 
-          {/* Trust Statistics Bar */}
-          <TrustStats />
+          {/* Trust Statistics Bar (Visitor-only trust metrics) */}
+          {!isLoggedIn && <TrustStats />}
 
           {/* Section 2: Today's Deals (Without Add to Cart per design.md) */}
           <TodaysDeals />
@@ -130,11 +132,12 @@ export default function HomePage() {
               <FeaturePillars />
               {/* A Clear 4-Step Process: From farm to market, made simpler */}
               <HowItWorks />
+              {/* Technology that works for farmers: Practical digital tools */}
+              <DigitalAgriculture />
             </>
           )}
 
-          {/* Section 7: Core Farmer & Commerce Utilities (Active everyday tools) */}
-          <DigitalAgriculture />
+          {/* Section 7: Core Farmer Marketplace & Knowledge Hub */}
           <MarketplaceShowcase />
           <KnowledgeSection />
 
