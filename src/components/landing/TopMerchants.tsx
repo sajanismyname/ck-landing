@@ -80,7 +80,7 @@ export function TopMerchants() {
             role="region"
             aria-roledescription="carousel"
             aria-label="Top Merchants Carousel"
-            className="flex overflow-x-auto scroll-smooth gap-3.5 sm:gap-4 lg:gap-5 pb-2 no-scrollbar [scroll-snap-type:x_mandatory] lg:grid lg:grid-cols-4"
+            className="flex overflow-x-auto scroll-smooth gap-3.5 sm:gap-4 lg:gap-5 pb-2 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [scroll-snap-type:x_mandatory] lg:grid lg:grid-cols-4"
           >
           {TOP_MERCHANTS.map((merchant) => (
             <a

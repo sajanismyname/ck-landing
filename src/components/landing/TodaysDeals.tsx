@@ -68,13 +68,13 @@ export function TodaysDeals() {
             topOffsetClass="top-1/2"
           />
 
-          {/* Scrolling Track */}
+          {/* Scrolling Track without visible bottom scrollbar */}
           <div
             ref={containerRef}
             role="region"
             aria-roledescription="carousel"
             aria-label="Today's Deals Carousel"
-            className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-4 py-1 no-scrollbar [scroll-snap-type:x_mandatory]"
+            className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-4 py-1 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [scroll-snap-type:x_mandatory]"
           >
             {TODAYS_DEALS_PRODUCTS.map((deal) => (
               <a
