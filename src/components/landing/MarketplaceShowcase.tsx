@@ -98,7 +98,7 @@ export function MarketplaceShowcase() {
 
         {/* Products Slider Container with Inset Overlaid Controls */}
         <div className="relative group">
-          {/* Overlay Arrows centered on product image */}
+          {/* Overlay Arrows in mid section inside product cards */}
           <CarouselOverlayArrows
             onPrev={scrollLeft}
             onNext={scrollRight}
@@ -106,7 +106,7 @@ export function MarketplaceShowcase() {
             canNext={canScrollRight}
             prevLabel="Previous products"
             nextLabel="Next products"
-            topOffsetClass="top-[72px] sm:top-[82px]"
+            topOffsetClass="top-1/2"
           />
 
           {/* Scrolling Track */}
@@ -115,7 +115,7 @@ export function MarketplaceShowcase() {
             role="region"
             aria-roledescription="carousel"
             aria-label="Direct Farm Marketplace Carousel"
-            className="flex overflow-x-auto scroll-smooth gap-3.5 sm:gap-4 pb-2 no-scrollbar [scroll-snap-type:x_mandatory]"
+            className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-4 py-1 no-scrollbar [scroll-snap-type:x_mandatory]"
           >
           {filteredProducts.map((product) => (
             <a
@@ -123,61 +123,56 @@ export function MarketplaceShowcase() {
               href="https://connectkisan.com/bazar"
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 [scroll-snap-align:start] w-[70vw] max-w-[220px] sm:w-[210px] md:w-[230px] lg:w-[220px] bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+              className="shrink-0 [scroll-snap-align:start] w-[210px] h-[210px] sm:w-[230px] sm:h-[230px] lg:w-[250px] lg:h-[250px] bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
             >
-              <div>
-                {/* Product Image with Badges (aspect-[4/3] compact proportion) */}
-                <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
-                  <Image
-                    src={product.imageUrl}
-                    alt={`${product.name} sourced from ${product.origin}`}
-                    fill
-                    sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 220px"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  
-                  {/* Origin tag over image */}
-                  <div className="absolute bottom-1.5 left-1.5 flex items-center gap-1 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-xs text-white text-[9px] font-medium">
-                    <MapPin className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
-                    <span className="truncate max-w-[120px]">{product.origin}</span>
-                  </div>
-
-                  {/* Highlight tag over image */}
-                  <div className="absolute top-1.5 right-1.5">
-                    <span className="bg-amber-500 text-stone-950 font-bold text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded shadow-xs">
-                      {product.highlightTag}
-                    </span>
-                  </div>
+              {/* Product Image with Badges (250 x 250 desktop proportion) */}
+              <div className="relative h-[115px] sm:h-[125px] lg:h-[135px] w-full bg-stone-100 overflow-hidden shrink-0">
+                <Image
+                  src={product.imageUrl}
+                  alt={`${product.name} sourced from ${product.origin}`}
+                  fill
+                  sizes="(max-width: 640px) 210px, (max-width: 1024px) 230px, 250px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                
+                {/* Origin tag over image */}
+                <div className="absolute bottom-1.5 left-1.5 flex items-center gap-1 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-xs text-white text-[8px] sm:text-[9px] font-medium">
+                  <MapPin className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
+                  <span className="truncate max-w-[110px]">{product.origin}</span>
                 </div>
 
-                {/* Content Details (Matching Deals / Top Merchants Size) */}
-                <div className="p-2.5 sm:p-3 space-y-1">
+                {/* Highlight tag over image */}
+                <div className="absolute top-1.5 right-1.5">
+                  <span className="bg-amber-500 text-stone-950 font-bold text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded shadow-xs">
+                    {product.highlightTag}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content Details (250 x 250 desktop proportion) */}
+              <div className="flex-1 min-h-0 p-2 sm:p-2.5 lg:p-3 flex flex-col justify-between">
+                <div className="space-y-0.5 min-w-0">
                   {/* Verification badges */}
-                  <div className="flex items-center gap-1 text-[9px] text-emerald-700 font-semibold truncate">
+                  <div className="flex items-center gap-1 text-[9px] sm:text-[10px] text-emerald-700 font-semibold truncate">
                     <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
                     <span>Verified • Traceable</span>
                   </div>
 
                   {/* Title & Nepali Name */}
-                  <h3 className="text-xs sm:text-[13px] font-bold text-stone-900 font-heading leading-tight group-hover:text-emerald-800 transition-colors line-clamp-1">
+                  <h3 className="text-xs sm:text-[13px] lg:text-[14px] font-bold text-stone-900 font-heading leading-tight group-hover:text-emerald-800 transition-colors truncate">
                     {product.name}
                   </h3>
                   <div className="text-[9px] sm:text-[10px] text-stone-500 truncate">
-                    {product.nepaliName}
-                  </div>
-
-                  {/* Unit & Description */}
-                  <div className="text-[9px] text-stone-600 line-clamp-1 pt-0.5">
-                    {product.unit}
+                    {product.nepaliName} • {product.unit}
                   </div>
                 </div>
-              </div>
 
-              {/* Bottom Action Footer */}
-              <div className="px-2.5 sm:px-3 py-1.5 border-t border-stone-100 flex items-center justify-between text-[10px] sm:text-[11px] font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors">
-                <span>View Product</span>
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                {/* Bottom Action Footer */}
+                <div className="pt-1 flex items-center justify-between border-t border-stone-100/80 text-[10px] sm:text-[11px] font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors">
+                  <span>View Harvest</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
               </div>
             </a>
           ))}

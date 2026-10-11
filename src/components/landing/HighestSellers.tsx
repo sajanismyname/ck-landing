@@ -62,7 +62,7 @@ export function HighestSellers() {
 
         {/* 5 Highest Seller Cards Carousel Container with Inset Overlaid Controls */}
         <div className="relative group">
-          {/* Overlay Arrows centered on product image */}
+          {/* Overlay Arrows in mid section inside product cards */}
           <CarouselOverlayArrows
             onPrev={scrollLeft}
             onNext={scrollRight}
@@ -70,7 +70,7 @@ export function HighestSellers() {
             canNext={canScrollRight}
             prevLabel="Previous products"
             nextLabel="Next products"
-            topOffsetClass="top-[72px] sm:top-[82px]"
+            topOffsetClass="top-1/2"
           />
 
           {/* Scrolling Track */}
@@ -79,7 +79,7 @@ export function HighestSellers() {
             role="region"
             aria-roledescription="carousel"
             aria-label="Highest Sellers Carousel"
-            className="flex overflow-x-auto scroll-smooth gap-3.5 sm:gap-4 pb-2 no-scrollbar [scroll-snap-type:x_mandatory]"
+            className="flex overflow-x-auto scroll-smooth gap-3 sm:gap-4 py-1 no-scrollbar [scroll-snap-type:x_mandatory]"
           >
             {HIGHEST_SELLERS_PRODUCTS.map((item, idx) => (
               <a
@@ -87,69 +87,65 @@ export function HighestSellers() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 [scroll-snap-align:start] w-[70vw] max-w-[220px] sm:w-[210px] md:w-[230px] lg:w-[220px] bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
+                className="shrink-0 [scroll-snap-align:start] w-[210px] h-[210px] sm:w-[230px] sm:h-[230px] lg:w-[250px] lg:h-[250px] bg-white rounded-xl sm:rounded-2xl overflow-hidden border border-stone-200/90 shadow-2xs hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between group cursor-pointer"
               >
-                <div>
-                  {/* Product Image Container (aspect-[4/3] for sleek proportion) */}
-                  <div className="relative aspect-[4/3] w-full bg-stone-100 overflow-hidden">
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.name}
-                      fill
-                      sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 220px"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                {/* Product Image Container (250 x 250 desktop proportion) */}
+                <div className="relative h-[115px] sm:h-[125px] lg:h-[135px] w-full bg-stone-100 overflow-hidden shrink-0">
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 640px) 210px, (max-width: 1024px) 230px, 250px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
 
-                    {/* Rank Badge */}
-                    <div className="absolute top-2 left-2">
-                      <span className="bg-emerald-900 text-white text-[9px] sm:text-[10px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center gap-0.5">
-                        <Award className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-400" />
-                        #{idx + 1}
-                      </span>
-                    </div>
-
-                    {/* Demand Tag */}
-                    <div className="absolute bottom-1.5 left-1.5 right-1.5">
-                      <div className="bg-stone-900/80 backdrop-blur-xs text-white text-[9px] font-semibold px-1.5 py-0.5 rounded text-center truncate">
-                        {item.demandIndicator}
-                      </div>
-                    </div>
+                  {/* Rank Badge */}
+                  <div className="absolute top-2 left-2">
+                    <span className="bg-emerald-900 text-white text-[9px] sm:text-[10px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center gap-0.5">
+                      <Award className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-400" />
+                      #{idx + 1}
+                    </span>
                   </div>
 
-                  {/* Content Details (compact vertical length) */}
-                  <div className="p-2.5 sm:p-3 space-y-1">
-                    <div className="text-[9px] sm:text-[10px] font-bold text-emerald-700 uppercase tracking-wider truncate">
-                      {item.category}
-                    </div>
-
-                    <h3 className="text-xs sm:text-[13px] font-bold text-stone-900 font-heading leading-tight group-hover:text-emerald-800 transition-colors line-clamp-1">
-                      {item.name}
-                    </h3>
-
-                    {/* Sales Volume Indicator */}
-                    <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-900 text-[10px] font-bold border border-emerald-200/80">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                      <span>{item.salesVolume}</span>
-                    </div>
-
-                    {/* Price */}
-                    <div className="pt-1 flex items-baseline justify-between gap-1">
-                      <div>
-                        <span className="text-xs sm:text-sm font-extrabold text-stone-900 font-heading">
-                          NPR {item.priceNpr.toLocaleString()}
-                        </span>
-                      </div>
-                      <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium truncate max-w-[80px]">
-                        {item.seller}
-                      </span>
+                  {/* Demand Tag */}
+                  <div className="absolute bottom-1.5 left-1.5 right-1.5">
+                    <div className="bg-stone-900/80 backdrop-blur-xs text-white text-[8px] sm:text-[9px] font-semibold px-1.5 py-0.5 rounded text-center truncate">
+                      {item.demandIndicator}
                     </div>
                   </div>
                 </div>
 
-                {/* View in Bazar Footer Link (No cart button) */}
-                <div className="px-2.5 sm:px-3 py-1.5 border-t border-stone-100 flex items-center justify-between text-[10px] sm:text-[11px] font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors">
-                  <span>View Details</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                {/* Content Details (250 x 250 desktop proportion) */}
+                <div className="flex-1 min-h-0 p-2 sm:p-2.5 lg:p-3 flex flex-col justify-between">
+                  <div className="space-y-0.5 min-w-0">
+                    <div className="text-[9px] sm:text-[10px] font-bold text-emerald-700 uppercase tracking-wider truncate">
+                      {item.category}
+                    </div>
+
+                    <h3 className="text-xs sm:text-[13px] lg:text-[14px] font-bold text-stone-900 font-heading leading-tight group-hover:text-emerald-800 transition-colors truncate">
+                      {item.name}
+                    </h3>
+
+                    {/* Sales Volume Indicator */}
+                    <div className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-emerald-800 truncate">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+                      <span className="truncate">{item.salesVolume}</span>
+                    </div>
+                  </div>
+
+                  {/* Price & Action Row */}
+                  <div className="pt-1 flex items-center justify-between border-t border-stone-100/80">
+                    <div>
+                      <span className="text-xs sm:text-sm lg:text-[15px] font-extrabold text-stone-900 font-heading">
+                        NPR {item.priceNpr.toLocaleString()}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center text-[10px] sm:text-[11px] font-bold text-emerald-700 group-hover:text-emerald-900 transition-colors shrink-0 ml-1">
+                      <span>Details</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform ml-0.5" />
+                    </div>
+                  </div>
                 </div>
               </a>
             ))}

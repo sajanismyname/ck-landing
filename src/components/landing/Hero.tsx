@@ -124,7 +124,7 @@ export function Hero() {
               
               {/* Main Card Container with Inset Navigation Controls */}
               <div
-                className="relative rounded-3xl bg-white p-5 sm:p-6 shadow-xl border border-stone-200/90 overflow-hidden transition-all"
+                className="relative rounded-3xl bg-white p-3.5 sm:p-6 shadow-xl border border-stone-200/90 overflow-hidden transition-all"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
@@ -134,7 +134,7 @@ export function Hero() {
                   type="button"
                   onClick={prevSlide}
                   aria-label="Previous slide"
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 hover:bg-white text-stone-700 hover:text-stone-950 shadow-md border border-stone-200/90 flex items-center justify-center transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 cursor-pointer"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 hover:bg-white text-stone-700 hover:text-stone-950 shadow-md border border-stone-200/90 flex items-center justify-center transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 cursor-pointer"
                   title="Previous slide"
                 >
                   <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -145,14 +145,14 @@ export function Hero() {
                   type="button"
                   onClick={nextSlide}
                   aria-label="Next slide"
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 hover:bg-white text-stone-700 hover:text-stone-950 shadow-md border border-stone-200/90 flex items-center justify-center transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 cursor-pointer"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 hover:bg-white text-stone-700 hover:text-stone-950 shadow-md border border-stone-200/90 flex items-center justify-center transition-all hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 cursor-pointer"
                   title="Next slide"
                 >
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
 
                 {/* Card Content with Slide Views */}
-                <div className="px-3 sm:px-4 space-y-4">
+                <div className="px-2 sm:px-4 space-y-4">
                   
                   {/* Slide 0: Today's Market Rates Snapshot */}
                   {currentSlide === 0 && (
@@ -285,15 +285,15 @@ export function Hero() {
                       </div>
 
                       {/* Weather Advisory Card */}
-                      <div className="bg-blue-50/80 rounded-2xl p-3.5 border border-blue-100 space-y-1.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-1.5 text-xs font-bold text-blue-900">
-                            <CloudRain className="w-3.5 h-3.5 text-blue-700" />
-                            <span>Localized Micro-Weather Alert</span>
+                      <div className="bg-blue-50/80 rounded-2xl p-3 sm:p-3.5 border border-blue-100 space-y-1.5">
+                        <div className="flex flex-wrap items-center justify-between gap-1">
+                          <div className="flex items-center gap-1.5 text-xs font-bold text-blue-900 min-w-0">
+                            <CloudRain className="w-3.5 h-3.5 text-blue-700 shrink-0" />
+                            <span className="truncate">Localized Micro-Weather Alert</span>
                           </div>
-                          <span className="text-[10px] font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">Rain: 80%</span>
+                          <span className="text-[10px] font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full shrink-0">Rain: 80%</span>
                         </div>
-                        <p className="text-[11px] text-blue-950 leading-relaxed">
+                        <p className="text-[11px] text-blue-950 leading-relaxed break-words">
                           Moderate rainfall expected in 18 hours. Defer foliar sprays and clear field runoff furrows.
                         </p>
                       </div>

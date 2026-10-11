@@ -57,27 +57,27 @@ export function TheChallenge() {
 
                 {/* Solution Rows */}
                 <div className="space-y-3 sm:space-y-3.5 my-auto">
-                  <div className="p-3.5 rounded-xl bg-emerald-900/90 border border-emerald-700/80 flex items-start gap-3">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-900/90 border border-emerald-700/80 flex items-start gap-3 min-w-0">
                     <div className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 shrink-0" />
-                    <div>
-                      <strong className="text-white block font-semibold text-xs sm:text-sm">Fragmented Market Information</strong>
-                      <span className="text-emerald-200/90 text-xs">Replaced by live Kalimati wholesale rates &amp; digital bidding.</span>
+                    <div className="min-w-0 flex-1">
+                      <strong className="text-white block font-semibold text-xs sm:text-sm break-words">Fragmented Market Information</strong>
+                      <span className="text-emerald-200/90 text-xs break-words">Replaced by live Kalimati wholesale rates &amp; digital bidding.</span>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-emerald-900/90 border border-emerald-700/80 flex items-start gap-3">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-900/90 border border-emerald-700/80 flex items-start gap-3 min-w-0">
                     <div className="w-2 h-2 rounded-full bg-rose-400 mt-1.5 shrink-0" />
-                    <div>
-                      <strong className="text-white block font-semibold text-xs sm:text-sm">Uncertain Crop Diagnosis</strong>
-                      <span className="text-emerald-200/90 text-xs">Replaced by 24/7 spoken Nepali AI &amp; expert agronomists.</span>
+                    <div className="min-w-0 flex-1">
+                      <strong className="text-white block font-semibold text-xs sm:text-sm break-words">Uncertain Crop Diagnosis</strong>
+                      <span className="text-emerald-200/90 text-xs break-words">Replaced by 24/7 spoken Nepali AI &amp; expert agronomists.</span>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-emerald-900/90 border border-emerald-700/80 flex items-start gap-3">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-900/90 border border-emerald-700/80 flex items-start gap-3 min-w-0">
                     <div className="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
-                    <div>
-                      <strong className="text-white block font-semibold text-xs sm:text-sm">Counterfeit Inputs &amp; Middlemen</strong>
-                      <span className="text-emerald-200/90 text-xs">Replaced by verified Bazar supplies &amp; direct farm traceability.</span>
+                    <div className="min-w-0 flex-1">
+                      <strong className="text-white block font-semibold text-xs sm:text-sm break-words">Counterfeit Inputs &amp; Middlemen</strong>
+                      <span className="text-emerald-200/90 text-xs break-words">Replaced by verified Bazar supplies &amp; direct farm traceability.</span>
                     </div>
                   </div>
                 </div>
