@@ -80,7 +80,7 @@ export function KnowledgeSection() {
             role="region"
             aria-roledescription="carousel"
             aria-label="Agricultural Knowledge Guides Carousel"
-            className="flex overflow-x-auto scroll-smooth gap-4 sm:gap-6 pb-2 no-scrollbar [scroll-snap-type:x_mandatory] lg:grid lg:grid-cols-3"
+            className="flex overflow-x-auto scroll-smooth gap-4 sm:gap-6 pb-2 no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [scroll-snap-type:x_mandatory] lg:grid lg:grid-cols-3"
           >
           {KNOWLEDGE_ARTICLES.map((article) => (
             <div
