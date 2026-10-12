@@ -190,6 +190,42 @@ export interface AppScreenshotSlide {
   highlights: string[];
 }
 
+export interface UserRoleItem {
+  id: string;
+  title: string;
+  nepaliTitle: string;
+  description: string;
+  imageUrl: string;
+  href: string;
+  ctaLabel?: string;
+}
+
+export interface CompanyAboutData {
+  tag: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  imageUrl: string;
+  features: {
+    iconName: string;
+    title: string;
+    description: string;
+  }[];
+  metrics: {
+    value: string;
+    label: string;
+    iconName: string;
+  }[];
+}
+
+export interface AppBannerData {
+  title: string;
+  subtitle: string;
+  appStoreUrl: string;
+  playStoreUrl: string;
+  backgroundImageUrl: string;
+}
+
 export interface FarmerTestimonial {
   id: string;
   name: string;
@@ -200,6 +236,9 @@ export interface FarmerTestimonial {
   impactMetric: string;
   impactLabel: string;
   initials: string;
+  avatarUrl?: string;
+  rating?: number;
+  isFeatured?: boolean;
 }
 
 export interface KnowledgeItem {
@@ -212,6 +251,9 @@ export interface KnowledgeItem {
   readTime: string;
   iconName: string;
   href: string;
+  imageUrl?: string;
+  tag?: string;
+  subCategory?: string;
 }
 
 export interface FooterSection {
@@ -375,10 +417,9 @@ export const SIDEBAR_NAV_ITEMS: SidebarNavItem[] = [
     id: "contribute",
     label: "Contribute",
     nepaliLabel: "योगदान पोर्टल",
-    href: "https://connectkisan.com/en/contribution",
+    href: "#contribute",
     iconName: "Heart",
     badge: "Join Community",
-    isExternal: true,
   },
 ];
 
@@ -1171,80 +1212,197 @@ export const DIGITAL_AG_FEATURES: DigitalAgFeature[] = [
 ];
 
 // -------------------------------------------------------------
-// FARMER TESTIMONIALS (AUTHENTIC STORIES)
+// ROLES OF CONNECT KISAN (FARMER, VENDOR, BUYER)
 // -------------------------------------------------------------
-export const FARMER_STORIES: FarmerTestimonial[] = [
+export const ROLES_DATA: UserRoleItem[] = [
   {
-    id: "story-1",
-    name: "Dev Kumar Dahal",
-    role: "Orthodox Tea Cultivator",
-    location: "Ilam, Koshi Province",
-    farmType: "Organic Tea Estate (12 Ropani)",
-    quote: "Through Connect Kisan's digital traceability and advisory, I improved our leaf quality grading and directly connected with buyers in Kathmandu without having to sacrifice margin to local brokers.",
-    impactMetric: "+28%",
-    impactLabel: "Better price realization",
-    initials: "DD",
+    id: "role-farmer",
+    title: "Farmer",
+    nepaliTitle: "किसान",
+    description: "Direct access to market and agronomy support",
+    imageUrl: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/bazar",
+    ctaLabel: "Join as Farmer",
   },
   {
-    id: "story-2",
-    name: "Pramila Sharma",
-    role: "Commercial Organic Vegetable Farmer",
-    location: "Nuwakot, Bagmati Province",
-    farmType: "Polyhouse & Open Field Cultivation",
-    quote: "The voice advisory helped diagnose a blight outbreak early on my tomato crops. Having real-time market prices from Kalimati on my phone lets our cooperative negotiate with confidence every morning.",
-    impactMetric: "3 Hours",
-    impactLabel: "Early pest intervention",
-    initials: "PS",
+    id: "role-vendor",
+    title: "Vendor",
+    nepaliTitle: "बिक्रेता",
+    description: "Sell farm equipment, seeds & inputs",
+    imageUrl: "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/bazar",
+    ctaLabel: "Become a Vendor",
   },
   {
-    id: "story-3",
-    name: "Ram Bahadur Thapa",
-    role: "Ginger & Cash Crop Farmer",
-    location: "Palpa, Lumbini Province",
-    farmType: "Terrace Farming Cluster (25 Farmers)",
-    quote: "Creating digital farm proposals through Connect Kisan allowed our farmers group to secure agricultural credit and bulk buy organic inputs directly from certified suppliers on Bazar.",
-    impactMetric: "100%",
-    impactLabel: "Transparent bidding access",
-    initials: "RT",
+    id: "role-buyer",
+    title: "Buyer",
+    nepaliTitle: "खरिदकर्ता",
+    description: "Buy farm-fresh produce direct",
+    imageUrl: "https://images.unsplash.com/photo-1610348725531-843dff563e2c?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/bazar",
+    ctaLabel: "Shop Fresh Harvest",
   },
 ];
 
 // -------------------------------------------------------------
-// KNOWLEDGE SECTION ARTICLES
+// ABOUT US / AGRI-TECH COMPANY DATA
+// -------------------------------------------------------------
+export const ABOUT_COMPANY_DATA: CompanyAboutData = {
+  tag: "ABOUT US",
+  title: "Connect Kisan",
+  subtitle: "An Agri-Tech Company",
+  description:
+    "Connect Kisan is an agricultural company dedicated to revolutionizing farming in Nepal. We combine modern technology with traditional farming practices to empower farmers and consumers.",
+  imageUrl:
+    "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+  features: [
+    {
+      iconName: "Smartphone",
+      title: "Empowering Farmers through Technology",
+      description:
+        "Smart mobile tools for field monitoring, weather updates, and agronomy advice.",
+    },
+    {
+      iconName: "Handshake",
+      title: "Connecting Farms to Market",
+      description:
+        "Direct marketplace connecting farmers to buyers with fair pricing.",
+    },
+  ],
+  metrics: [
+    {
+      value: "30+",
+      label: "Districts",
+      iconName: "MapPin",
+    },
+    {
+      value: "5000+",
+      label: "Active Farmers",
+      iconName: "Users",
+    },
+    {
+      value: "20,000+",
+      label: "Products Delivered",
+      iconName: "PackageCheck",
+    },
+  ],
+};
+
+// -------------------------------------------------------------
+// APP DOWNLOAD BANNER DATA
+// -------------------------------------------------------------
+export const APP_BANNER_DATA: AppBannerData = {
+  title: "One App, Many Possibilities",
+  subtitle:
+    "Join over 5,000+ farmers who are already using Connect Kisan to grow their business.",
+  appStoreUrl: "https://apple.com",
+  playStoreUrl: "https://play.google.com/store/apps/details?id=com.connectkisan",
+  backgroundImageUrl:
+    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
+};
+
+// -------------------------------------------------------------
+// FARMER TESTIMONIALS (REAL FARMERS. REAL RESULTS.)
+// -------------------------------------------------------------
+export const FARMER_STORIES: FarmerTestimonial[] = [
+  {
+    id: "story-1",
+    name: "Hari Bahadur Thapa",
+    role: "Dairy Farmer",
+    location: "Chitwan, Bagmati Province",
+    farmType: "Commercial Dairy & Fodder Co-op",
+    quote:
+      "Through Connect Kisan, I sold my milk produce directly to local dairies at fair prices. The agronomy advice helped improve yield significantly.",
+    impactMetric: "+28%",
+    impactLabel: "Better price realization",
+    initials: "HT",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+    rating: 5,
+    isFeatured: false,
+  },
+  {
+    id: "story-2",
+    name: "Sunita Gurung",
+    role: "Organic Vegetable Farmer",
+    location: "Pokhara, Gandaki Province",
+    farmType: "Polyhouse & Organic Greens Cluster",
+    quote:
+      "Connecting directly with verified buyers transformed how I sell organic vegetables. No more middleman commissions and fair payment on time.",
+    impactMetric: "3 Hours",
+    impactLabel: "Direct cooperative sales",
+    initials: "SG",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
+    rating: 5,
+    isFeatured: true,
+  },
+  {
+    id: "story-3",
+    name: "Bikram Shrestha",
+    role: "Rice & Grain Grower",
+    location: "Jhapa, Koshi Province",
+    farmType: "Paddy & Maize Farm Cluster",
+    quote:
+      "The seasonal seed recommendations and weather alerts helped me protect my paddy harvest from unexpected floods. Truly invaluable.",
+    impactMetric: "100%",
+    impactLabel: "Crop protection alerts",
+    initials: "BS",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+    rating: 5,
+    isFeatured: false,
+  },
+];
+
+// -------------------------------------------------------------
+// KNOWLEDGE SECTION ARTICLES (LATEST AGRICULTURAL GUIDES & INSIGHTS)
 // -------------------------------------------------------------
 export const KNOWLEDGE_ARTICLES: KnowledgeItem[] = [
   {
-    id: "kb-crops",
-    category: "Crop Knowledge",
-    nepaliCategory: "बाली ज्ञान",
-    title: "Best Practices for Highland Cash Crop Cultivation",
-    nepaliTitle: "उच्च पहाडी नगदे बाली खेती प्रविधि",
-    description: "Scientific nursery management, organic disease prevention, and post-harvest drying techniques for ginger, cardamom, and tea.",
+    id: "kb-cardamom",
+    category: "Agronomy • Commercial",
+    nepaliCategory: "व्यावसायिक कृषि",
+    tag: "CASH CROPS",
+    title: "Optimizing Cardamom Yields & Drying Techniques in Koshi Province",
+    nepaliTitle: "कोशी प्रदेशमा अलैंची खेती र आधुनिक भट्टी सुकाउने प्रविधि",
+    description:
+      "Scientific plantation techniques, viral disease management, and efficient bhatti drying to maximize high-grade export quality.",
     readTime: "5 min read",
     iconName: "Wheat",
-    href: "#knowledge-crops",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/knowledge-bank",
   },
   {
-    id: "kb-livestock",
-    category: "Livestock Knowledge",
-    nepaliCategory: "पशुपालन ज्ञान",
-    title: "Modern Dairy & Goat Farming Management",
-    nepaliTitle: "आधुनिक गाईभैंसी तथा बाख्रापालन व्यवस्थापन",
-    description: "Nutrition guidelines, seasonal vaccination schedules, and housing design optimized for Nepal's hilly and terai topography.",
+    id: "kb-paddy-fertilizer",
+    category: "Fertilizer & Soil • Cereal",
+    nepaliCategory: "मल तथा माटो व्यवस्थापन",
+    tag: "CROPS",
+    title: "Seasonal Balanced Fertilizer Application for Monsoon Paddy",
+    nepaliTitle: "वर्षे धानमा सन्तुलित मलखाद प्रयोग विधि र समय तालिका",
+    description:
+      "Optimizing basal dose, split urea top dressing, and micronutrient balance for maximum tillering and disease resistance.",
     readTime: "6 min read",
-    iconName: "Beef",
-    href: "#knowledge-livestock",
+    iconName: "Wheat",
+    imageUrl:
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/knowledge-bank",
   },
   {
-    id: "kb-terrace",
-    category: "Terrace Farming",
-    nepaliCategory: "कौसी तथा कान्ला खेती",
-    title: "Soil Health & Slope Water Conservation",
-    nepaliTitle: "माटो संरक्षण र भिरालो जग्गामा सिंचाइ",
-    description: "Practical soil test interpretation, terrace wall reinforcement, and drip irrigation systems for sustainable hillside yields.",
+    id: "kb-subsidies",
+    category: "Schemes • Subsidies",
+    nepaliCategory: "सरकारी अनुदान तथा बीमा",
+    tag: "POLICY",
+    title: "Government Agricultural Subsidy & Krishi Bima Schemes 2081/82",
+    nepaliTitle: "सरकारी कृषि अनुदान, सहुलियतपूर्ण कर्जा र कृषि बीमा योजनाहरू",
+    description:
+      "Step-by-step application guide for interest subsidies, cooperative grants, cold store facilities, and premium crop insurance.",
     readTime: "4 min read",
-    iconName: "Mountain",
-    href: "#knowledge-terrace",
+    iconName: "BookOpen",
+    imageUrl:
+      "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=600&q=80",
+    href: "https://connectkisan.com/knowledge-bank",
   },
 ];
 

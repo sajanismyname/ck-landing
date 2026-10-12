@@ -5,7 +5,9 @@ import { useState } from "react";
 import { Header } from "@/components/landing/Header";
 import { Sidebar } from "@/components/landing/Sidebar";
 import { Hero } from "@/components/landing/Hero";
-import { TrustStats } from "@/components/landing/TrustStats";
+import { RolesSection } from "@/components/landing/RolesSection";
+import { AboutSection } from "@/components/landing/AboutSection";
+import { AppDownloadBanner } from "@/components/landing/AppDownloadBanner";
 import { TodaysDeals } from "@/components/landing/TodaysDeals";
 import { TopMerchants } from "@/components/landing/TopMerchants";
 import { HighestSellers } from "@/components/landing/HighestSellers";
@@ -105,25 +107,31 @@ export default function HomePage() {
 
         {/* 3. Main Content Area */}
         <main className="flex-1 min-w-0 w-full overflow-x-clip">
-          {/* Section 1: Hero / CTA (Smart adaptive CTA for logged-in user) */}
+          {/* Section 1: Hero / CTA */}
           <Hero isLoggedIn={isLoggedIn} />
 
-          {/* Trust Statistics Bar (Visitor-only trust metrics) */}
-          {!isLoggedIn && <TrustStats />}
+          {/* Section 2: Roles of Connect Kisan (Hidden while logged in) */}
+          {!isLoggedIn && <RolesSection />}
 
-          {/* Section 2: Today's Deals (Without Add to Cart per design.md) */}
+          {/* Section 3: About Us + 3-Metric Stats Card (Hidden while logged in) */}
+          {!isLoggedIn && <AboutSection />}
+
+          {/* Section 4: Today's Deals (Without Add to Cart per design.md) */}
           <TodaysDeals />
 
-          {/* Section 3: Top Merchants */}
+          {/* Section 5: Top Merchants */}
           <TopMerchants />
 
-          {/* Section 4: Highest Sellers (Without Add to Cart per design.md) */}
+          {/* Section 6: Highest Sellers (Without Add to Cart per design.md) */}
           <HighestSellers />
 
-          {/* Section 5: Community Contribution CTA (Visitor-only community outreach) */}
-          {!isLoggedIn && <ContributeSection />}
+          {/* Section 7: Mobile App Download Banner (Hidden while logged in) */}
+          {!isLoggedIn && <AppDownloadBanner />}
 
-          {/* Section 6: Visitor Onboarding & Promotional Storytelling */}
+          {/* Section 8: Community Contribution Section (Direct destination for mobile bottom nav) */}
+          <ContributeSection />
+
+          {/* Section 9: Visitor Onboarding & Promotional Storytelling */}
           {!isLoggedIn && (
             <>
               {/* The Agricultural Challenge Narrative */}
@@ -137,21 +145,20 @@ export default function HomePage() {
             </>
           )}
 
-          {/* Section 7: Core Farmer Marketplace & Knowledge Hub */}
+          {/* Section 10: Core Farmer Marketplace */}
           <MarketplaceShowcase />
+
+          {/* Section 11: Real Farmers. Real Results. (3-Card Testimonials) */}
+          <FarmerStories />
+
+          {/* Section 12: Latest Agricultural Guides & Insights (Photo-Rich Guides) */}
           <KnowledgeSection />
 
-          {/* Section 8: Visitor Social Proof, Lead Generation & Final Onboarding CTA */}
-          {!isLoggedIn && (
-            <>
-              {/* Community Reviews / Farmer Experiences */}
-              <FarmerStories />
-              {/* Connect With Us / Direct Farmer Support Inquiry Form */}
-              <ContactSection />
-              {/* Final Onboarding Registration Banner */}
-              <FinalCTA />
-            </>
-          )}
+          {/* Section 13: Direct Farmer Support Inquiry Form & App QR Code */}
+          <ContactSection />
+
+          {/* Section 14: Final Onboarding Registration Banner */}
+          {!isLoggedIn && <FinalCTA />}
         </main>
       </div>
 

@@ -32,7 +32,7 @@ export function ContributeSection() {
   return (
     <section
       id="contribute"
-      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#FAF9F5] via-emerald-50/30 to-[#FAF9F5] border-t border-b border-stone-200/80 relative overflow-hidden"
+      className="py-16 sm:py-20 lg:py-24 scroll-mt-16 sm:scroll-mt-20 bg-gradient-to-b from-[#FAF9F5] via-emerald-50/30 to-[#FAF9F5] border-t border-b border-stone-200/80 relative overflow-hidden"
       aria-label="Community Contribution Platform"
     >
       {/* Background organic glow */}

@@ -51,11 +51,9 @@ export function MobileBottomNav({ activeTab = "home" }: MobileBottomNavProps) {
           <span className="text-[11px] mt-0.5">Knowledge</span>
         </a>
 
-        {/* 4. Contribute */}
+        {/* 4. Contribute (Directs to Dashboard's Contribute Section) */}
         <a
-          href="https://connectkisan.com/en/contribution"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#contribute"
           className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-stone-600 hover:text-emerald-800 transition-all font-medium group"
         >
           <div className="p-0.5 rounded-full text-rose-600 group-hover:scale-110 transition-transform">

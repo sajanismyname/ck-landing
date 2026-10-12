@@ -1,153 +1,133 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
+import Image from "next/image";
 import { FARMER_STORIES } from "@/data/landingData";
+import { useCarousel } from "@/hooks/useCarousel";
 import {
-  Quote,
-  ChevronLeft,
-  ChevronRight,
+  Star,
   MapPin,
-  TrendingUp,
-  Award,
-  CheckCircle2,
+  Sparkles,
 } from "lucide-react";
+import { CarouselOverlayArrows } from "@/components/ui/carousel-controls";
 
 export function FarmerStories() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevStory = () => {
-    setCurrentIndex((prev) => (prev === 0 ? FARMER_STORIES.length - 1 : prev - 1));
-  };
-
-  const nextStory = () => {
-    setCurrentIndex((prev) => (prev === FARMER_STORIES.length - 1 ? 0 : prev + 1));
-  };
-
-  const story = FARMER_STORIES[currentIndex];
+  const {
+    containerRef,
+    canScrollLeft,
+    canScrollRight,
+    scrollLeft,
+    scrollRight,
+  } = useCarousel();
 
   return (
-    <section id="stories" className="py-16 sm:py-20 lg:py-24 bg-[#FAF9F5]" aria-label="Farmer Success Stories">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="stories" className="py-14 sm:py-20 lg:py-24 bg-[#FAF9F5] border-b border-stone-200/80" aria-label="Real Farmers Testimonials">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-semibold uppercase tracking-wider">
-            <Award className="w-3.5 h-3.5 text-emerald-700" />
-            <span>Community Impact</span>
-          </div>
-
+        {/* Section Header matching Mockup */}
+        <div className="max-w-3xl mx-auto text-center space-y-3">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 font-heading tracking-tight">
-            Real farmers. Real experiences.
+            Real Farmers. <span className="text-emerald-700">Real Results.</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto">
-            See how growers and agricultural cooperatives across Nepal are transforming their harvest yields and market income.
+          <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-xl mx-auto">
+            See how growers and agricultural cooperatives across Nepal are transforming their lives.
           </p>
         </div>
 
-        {/* Featured Testimonial Card */}
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-stone-200/90 shadow-lg relative overflow-hidden">
-          
-          {/* Subtle Quote Icon Backdrop */}
-          <Quote className="absolute top-6 right-8 w-20 sm:w-24 h-20 sm:h-24 text-emerald-100/60 -z-0 pointer-events-none" />
+        {/* 3 Testimonials Row / Carousel Track with Inset Overlaid Controls */}
+        <div className="relative group">
+          {/* Overlaid Navigation Arrows matching other product card carousels */}
+          <CarouselOverlayArrows
+            onPrev={scrollLeft}
+            onNext={scrollRight}
+            canPrev={canScrollLeft}
+            canNext={canScrollRight}
+            prevLabel="Previous farmer story"
+            nextLabel="Next farmer story"
+            topOffsetClass="top-1/2"
+            className="lg:hidden"
+          />
 
-          <div className="relative z-10 flex flex-col justify-between min-h-[300px] space-y-6">
-            
-            {/* Top Row: Farmer Profile & Location */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-100">
-              <div className="flex items-center gap-3.5 sm:gap-4">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-700 text-white flex items-center justify-center font-bold text-base sm:text-lg font-heading shadow-md shrink-0">
-                  {story.initials}
+          <div
+            ref={containerRef}
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Farmer Testimonials Carousel"
+            className="flex overflow-x-auto scroll-smooth gap-5 sm:gap-6 pb-2 no-scrollbar [scroll-snap-type:x_mandatory] lg:grid lg:grid-cols-3"
+          >
+            {FARMER_STORIES.map((story) => (
+              <div
+                key={story.id}
+                className={`shrink-0 [scroll-snap-align:start] w-[85vw] max-w-[340px] sm:w-[320px] lg:w-auto bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/90 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between relative ${
+                  story.isFeatured ? "ring-1.5 ring-emerald-600/40 border-emerald-300" : ""
+                }`}
+              >
+                {/* Featured Pill for Center Card */}
+                {story.isFeatured && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                    <span className="bg-emerald-900 text-white text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-xs flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-amber-400" />
+                      FEATURED STORY
+                    </span>
+                  </div>
+                )}
+
+                <div className="space-y-4">
+                  {/* Top Profile Strip */}
+                  <div className="flex items-center gap-3.5 pt-1">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden bg-stone-100 border border-emerald-100 shrink-0">
+                      {story.avatarUrl ? (
+                        <Image
+                          src={story.avatarUrl}
+                          alt={story.name}
+                          fill
+                          sizes="48px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-emerald-700 text-white font-bold flex items-center justify-center text-sm">
+                          {story.initials}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-0.5 min-w-0">
+                      <h3 className="text-sm sm:text-base font-bold text-stone-900 font-heading truncate">
+                        {story.name}
+                      </h3>
+                      <div className="flex items-center gap-1 text-[11px] text-stone-500 truncate">
+                        <MapPin className="w-3 h-3 text-stone-400 shrink-0" />
+                        <span>{story.location}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 5 Gold Star Rating */}
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+
+                  {/* Testimonial Quote */}
+                  <p className="text-xs sm:text-sm text-stone-700 leading-relaxed font-medium italic line-clamp-4">
+                    &ldquo;{story.quote}&rdquo;
+                  </p>
                 </div>
-                <div>
-                  <h3 className="text-base sm:text-xl font-bold text-stone-900 font-heading">
-                    {story.name}
-                  </h3>
-                  <div className="text-xs sm:text-sm text-emerald-800 font-medium">
+
+                {/* Bottom Tag */}
+                <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between">
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[11px] font-bold border border-emerald-100">
                     {story.role}
-                  </div>
-                  <div className="flex items-center gap-1.5 text-xs text-stone-500 mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-                    <span>{story.location}</span>
-                  </div>
+                  </span>
+                  <span className="text-[10px] text-stone-400 font-medium">
+                    Verified Farmer
+                  </span>
                 </div>
               </div>
-
-              {/* Impact Metric Pill */}
-              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-2.5 sm:p-3 px-3.5 sm:px-4 text-left sm:text-right shrink-0">
-                <div className="text-base sm:text-xl font-extrabold text-emerald-800 font-heading flex items-center sm:justify-end gap-1">
-                  <TrendingUp className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>{story.impactMetric}</span>
-                </div>
-                <div className="text-[11px] text-emerald-700 font-medium">
-                  {story.impactLabel}
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial Quote */}
-            <div className="py-2 sm:py-4 animate-in fade-in duration-200">
-              <p className="text-base sm:text-xl text-stone-700 font-medium leading-relaxed italic">
-                “{story.quote}”
-              </p>
-              <div className="mt-4 flex items-center gap-2 text-xs text-stone-500">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Verified Cooperative Member • {story.farmType}</span>
-              </div>
-            </div>
-
-            {/* Bottom Controls: Carousel Navigation & Pagination */}
-            <div className="pt-6 border-t border-stone-100 flex flex-wrap items-center justify-between gap-4">
-              
-              {/* Story Counter & Dots */}
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold text-stone-500 font-mono">
-                  Story {currentIndex + 1} of {FARMER_STORIES.length}
-                </span>
-                <div className="flex items-center gap-1.5">
-                  {FARMER_STORIES.map((_, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setCurrentIndex(idx)}
-                      aria-label={`Go to story ${idx + 1}`}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        currentIndex === idx
-                          ? "w-5 bg-emerald-700"
-                          : "w-1.5 bg-stone-300 hover:bg-stone-400"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Navigation Arrows */}
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={prevStory}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 flex items-center justify-center transition-all cursor-pointer shadow-2xs hover:border-emerald-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                  aria-label="Previous farmer story"
-                  title="Previous story"
-                >
-                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={nextStory}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-stone-300 bg-emerald-700 hover:bg-emerald-800 text-white flex items-center justify-center transition-all cursor-pointer shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-                  aria-label="Next farmer story"
-                  title="Next story"
-                >
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                </button>
-              </div>
-
-            </div>
-
+            ))}
           </div>
-
         </div>
 
       </div>

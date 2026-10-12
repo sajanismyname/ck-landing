@@ -183,12 +183,13 @@ export function Sidebar({
 
               // 2. Contribute Item
               if (item.id === "contribute") {
+                const isExternal = item.href?.startsWith("http");
                 return (
                   <a
                     key={item.id}
                     href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
                     className={`flex items-center gap-3 p-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all text-stone-700 hover:bg-emerald-50 hover:text-emerald-900 group ${
                       !isDesktopExpanded ? "justify-center p-2.5 bg-[#064E3B] text-white hover:bg-emerald-900" : ""
                     }`}
@@ -382,12 +383,13 @@ export function Sidebar({
 
                   // 2. Contribute
                   if (item.id === "contribute") {
+                    const isExternal = item.href?.startsWith("http");
                     return (
                       <a
                         key={item.id}
                         href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
                         onClick={onCloseMobile}
                         className="flex items-center justify-between p-3 rounded-xl text-sm font-semibold text-stone-800 hover:bg-stone-100"
                       >

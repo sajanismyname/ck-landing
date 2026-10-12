@@ -14,6 +14,7 @@ import {
   Clock,
   HelpCircle,
   Sparkles,
+  QrCode,
 } from "lucide-react";
 
 export function ContactSection() {
@@ -159,17 +160,48 @@ export function ContactSection() {
               </div>
             </div>
 
-            {/* 2. Quick Assistance / FAQ Box (Flush below Customer Support Card) */}
-            <div className="bg-white rounded-2xl p-4 sm:p-4.5 border border-stone-200/90 shadow-sm flex items-center gap-3.5 shrink-0">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
-                <HelpCircle className="w-5 h-5" />
+            {/* 2. Mobile App Download & QR Code Box matching Mockup */}
+            <div className="bg-[#EBF3ED] rounded-2xl p-4 sm:p-5 border border-emerald-200/80 shadow-2xs flex flex-col sm:flex-row items-center gap-4 shrink-0">
+              {/* QR Code Container */}
+              <div className="w-20 h-20 sm:w-22 sm:h-22 bg-white rounded-xl p-1.5 border border-emerald-200/90 shadow-2xs flex items-center justify-center shrink-0">
+                <svg className="w-full h-full text-stone-900" viewBox="0 0 100 100" fill="currentColor">
+                  {/* Outer Frame Top Left */}
+                  <rect x="10" y="10" width="28" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="6"/>
+                  <rect x="19" y="19" width="10" height="10" fill="currentColor"/>
+                  {/* Outer Frame Top Right */}
+                  <rect x="62" y="10" width="28" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="6"/>
+                  <rect x="71" y="19" width="10" height="10" fill="currentColor"/>
+                  {/* Outer Frame Bottom Left */}
+                  <rect x="10" y="62" width="28" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="6"/>
+                  <rect x="19" y="71" width="10" height="10" fill="currentColor"/>
+                  {/* Data Pattern Dots */}
+                  <rect x="46" y="12" width="8" height="8" fill="currentColor"/>
+                  <rect x="46" y="28" width="8" height="8" fill="currentColor"/>
+                  <rect x="12" y="46" width="8" height="8" fill="currentColor"/>
+                  <rect x="28" y="46" width="8" height="8" fill="currentColor"/>
+                  <rect x="46" y="46" width="8" height="8" fill="currentColor"/>
+                  <rect x="62" y="46" width="8" height="8" fill="currentColor"/>
+                  <rect x="78" y="46" width="8" height="8" fill="currentColor"/>
+                  <rect x="46" y="62" width="8" height="8" fill="currentColor"/>
+                  <rect x="62" y="62" width="8" height="8" fill="currentColor"/>
+                  <rect x="78" y="62" width="8" height="8" fill="currentColor"/>
+                  <rect x="46" y="78" width="8" height="8" fill="currentColor"/>
+                  <rect x="62" y="78" width="8" height="8" fill="currentColor"/>
+                  <rect x="78" y="78" width="8" height="8" fill="currentColor"/>
+                </svg>
               </div>
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-stone-900">
-                  Are you a Farmer seeking immediate advisory?
+
+              {/* QR Code Explanation */}
+              <div className="space-y-1 text-center sm:text-left">
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 text-[10px] font-bold uppercase tracking-wider">
+                  <QrCode className="w-3 h-3 text-emerald-700" />
+                  <span>Connect Kisan App</span>
+                </div>
+                <h4 className="text-xs sm:text-sm font-bold text-stone-900 leading-snug">
+                  Scan to Download App
                 </h4>
-                <p className="text-xs text-stone-500 mt-0.5">
-                  Use our 24/7 Voice AI Krishi Bot directly in the app.
+                <p className="text-[11px] text-stone-600 leading-relaxed">
+                  Available for direct install on Android &amp; iOS devices.
                 </p>
               </div>
             </div>
