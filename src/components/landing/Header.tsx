@@ -154,47 +154,48 @@ export function Header({
 
         </div>
 
-        {/* Mobile Sub-Header Row: Exact Viewport Center Search Bar */}
-        <div className="pb-3 pt-0.5 md:hidden w-full max-w-full relative flex items-center min-h-[44px]">
-          
-          {/* 1. Sidebar Toggle Button: Aligned to the Left */}
-          <button
-            type="button"
-            onClick={onToggleSidebar}
-            className="inline-flex items-center justify-center w-9 h-9 p-1.5 text-stone-800 hover:text-emerald-800 hover:bg-stone-100 rounded-lg transition-colors shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 z-10"
-            aria-label={isSidebarOpen ? "Close navigation menu" : "Open navigation menu"}
-            title="Toggle sidebar navigation"
-          >
-            <Menu className="w-6 h-6 text-stone-800 stroke-[2.2]" />
-          </button>
+        {/* Mobile Sub-Header Row: Search Bar exactly centered between Hamburger Menu and Side Viewport */}
+        <div className="pb-3 pt-0.5 md:hidden w-full max-w-full">
+          <div className="flex items-center w-full max-w-full">
+            
+            {/* 1. Sidebar Toggle Button: Original Three-Line Hamburger Icon (No Circle Enclosure) */}
+            <button
+              type="button"
+              onClick={onToggleSidebar}
+              className="inline-flex items-center justify-center w-9 h-9 p-1.5 text-stone-800 hover:text-emerald-800 hover:bg-stone-100 rounded-lg transition-colors shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              aria-label={isSidebarOpen ? "Close navigation menu" : "Open navigation menu"}
+              title="Toggle sidebar navigation"
+            >
+              <Menu className="w-6 h-6 text-stone-800 stroke-[2.2]" />
+            </button>
 
-          {/* 2. Search Bar Input: Positioned at exact horizontal center of the viewport (left: 50%, transform: translateX(-50%)) */}
-          <form
-            onSubmit={handleSearchSubmit}
-            className="absolute left-1/2 -translate-x-1/2 z-0 w-[min(280px,calc(100vw-116px))] sm:w-[min(340px,calc(100vw-120px))]"
-          >
-            <div className="flex items-center h-10 w-full bg-white rounded-full border border-stone-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/20 px-3.5 shadow-2xs transition-all">
-              <Search className="w-4 h-4 text-stone-400 mr-2 shrink-0" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search crops, prices..."
-                className="w-full py-0.5 text-xs sm:text-sm bg-transparent text-stone-900 placeholder:text-stone-400 outline-none min-w-0"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery("")}
-                  className="p-0.5 text-stone-400 hover:text-stone-600 shrink-0"
-                  aria-label="Clear search"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
+            {/* 2. Search Bar: Taller and more prominent, keeping exact current width and length */}
+            <div className="flex-1 min-w-0 flex items-center justify-center px-3 sm:px-4">
+              <form onSubmit={handleSearchSubmit} className="w-full flex justify-center">
+                <div className="flex items-center h-11 sm:h-12 w-full max-w-[235px] sm:max-w-[265px] bg-white rounded-full border border-stone-300 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/20 px-3.5 shadow-2xs transition-all">
+                  <Search className="w-4 h-4 text-stone-400 mr-2 shrink-0" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search crops, prices..."
+                    className="w-full py-1 text-xs sm:text-sm bg-transparent text-stone-900 placeholder:text-stone-400 outline-none min-w-0"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className="p-1 text-stone-400 hover:text-stone-600 shrink-0"
+                      aria-label="Clear search"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </form>
             </div>
-          </form>
 
+          </div>
         </div>
 
       </div>
