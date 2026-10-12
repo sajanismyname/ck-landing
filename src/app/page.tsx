@@ -148,14 +148,14 @@ export default function HomePage() {
           {/* Section 10: Core Farmer Marketplace */}
           <MarketplaceShowcase />
 
-          {/* Section 11: Real Farmers. Real Results. (3-Card Testimonials) */}
-          <FarmerStories />
+          {/* Section 11: Real Farmers. Real Results. (3-Card Testimonials / Reviews - Hidden while logged in) */}
+          {!isLoggedIn && <FarmerStories />}
 
           {/* Section 12: Latest Agricultural Guides & Insights (Photo-Rich Guides) */}
           <KnowledgeSection />
 
-          {/* Section 13: Direct Farmer Support Inquiry Form & App QR Code */}
-          <ContactSection />
+          {/* Section 13: Direct Farmer Support Inquiry Form & App QR Code (Hidden while logged in) */}
+          {!isLoggedIn && <ContactSection />}
 
           {/* Section 14: Final Onboarding Registration Banner */}
           {!isLoggedIn && <FinalCTA />}
